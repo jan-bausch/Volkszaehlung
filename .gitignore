@@ -1,0 +1,5 @@
+build/data/*
+!build/data/example.json
+!build/data/test.json
+build/main.js
+.sublime-project
