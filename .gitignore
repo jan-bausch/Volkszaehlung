@@ -3,3 +3,4 @@ build/data/*
 !build/data/test.json
 build/main.js
 .sublime-project
+import/

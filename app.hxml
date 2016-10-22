@@ -1,3 +1,4 @@
+#build webapp
 -js build/main.js
 -main app.Main
 -D js-flatten

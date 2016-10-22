@@ -1,0 +1,4 @@
+#Build cli to import raw excel sheets
+-neko import/importer.n
+-main app.Importer
+-lib mcli

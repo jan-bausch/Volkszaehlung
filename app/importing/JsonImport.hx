@@ -4,29 +4,12 @@ import app.App;
 import app.simulation.Group;
 import app.simulation.Person;
 import app.simulation.Member;
+import app.importing.Json;
 
 import haxe.Http;
 import haxe.Json;
 
 
-typedef JsonPerson= {
-    var name: String;
-    var age: Int;
-    var rank: Int;
-}
-
-typedef JsonGroup = {
-    var children: Null<Array<JsonGroup>>;
-    var members: Null<Array<JsonPerson>>;
-    var name: String;
-    var color: Null<String>;
-}
-
-typedef JsonRoot = {
-    var groups: Array<JsonGroup>;
-    var year: Int;
-    var week: Int;
-}
 
 class JsonImport {
 
