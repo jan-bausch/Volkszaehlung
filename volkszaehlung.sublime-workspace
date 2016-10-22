@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"J",
+				"JsonPerson	app.importing.Json"
+			],
+			[
+				"sip",
+				"sippeJson	var"
+			],
+			[
+				"Json",
+				"JsonGroup	app.importing.Json"
+			],
+			[
+				"pars",
+				"parseInt( x : String )	Null<Int>"
+			],
+			[
+				"sipp",
+				"sippeJson"
+			],
+			[
+				"s",
+				"saveContent(...)	Void"
+			],
+			[
+				"get",
+				"getDate(  )	Int"
+			],
+			[
 				"sys",
 				"Sys	class"
 			],
@@ -24,20 +52,12 @@
 				"FileSystem	class"
 			],
 			[
-				"Json",
-				"JsonRoot	app.importing.JsonImport"
-			],
-			[
 				"pr",
 				"println( v : Dynamic )	Void"
 			],
 			[
 				"par",
 				"partners	var"
-			],
-			[
-				"get",
-				"getRankCount(...)	Int"
 			],
 			[
 				"GR",
@@ -494,26 +514,6 @@
 			[
 				"Bitm",
 				"Bitmap	openfl.display"
-			],
-			[
-				"pol",
-				"polygon1"
-			],
-			[
-				"poly",
-				"polygonResponse	var"
-			],
-			[
-				"m",
-				"movementProjection	var"
-			],
-			[
-				"proj",
-				"projection1	var"
-			],
-			[
-				"Pro",
-				"projection2"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "app/importing/Json.hx",
 			"settings":
 			{
-				"buffer_size": 362,
+				"buffer_size": 384,
 				"line_ending": "Windows"
 			}
 		},
@@ -531,15 +531,15 @@
 			"file": "app/Importer.hx",
 			"settings":
 			{
-				"buffer_size": 1907,
+				"buffer_size": 4817,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/importing/JsonImport.hx",
+			"file": "build/data/test.json",
 			"settings":
 			{
-				"buffer_size": 2029,
+				"buffer_size": 2973,
 				"line_ending": "Windows"
 			}
 		},
@@ -674,6 +674,8 @@
 	],
 	"file_history":
 	[
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/build/data/2016-9-22.json",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/importing/JsonImport.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/Importer.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/build/data/test.json",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/.gitmodules",
@@ -682,7 +684,6 @@
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/rendering/Renderer.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/simulation/Simulation.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/simulation/Group.hx",
-		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/importing/JsonImport.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/simulation/Person.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/build/main.js",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/build/index.html",
@@ -800,12 +801,11 @@
 		"/C/Users/Bausch/AppData/Roaming/Sublime Text 3/Packages/User/Zeal.sublime-settings",
 		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/math/Collision.hx",
 		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/math/Rectangle.hx",
-		"/D/Dateien/JF-Entertainment/Projekte/Games/Woehler/src/app/entities/sprites/RoadSprite.hx",
-		"/D/Dateien/JF-Entertainment/Projekte/Games/Woehler/src/app/systems/LevelLoadingSystem.hx"
+		"/D/Dateien/JF-Entertainment/Projekte/Games/Woehler/src/app/entities/sprites/RoadSprite.hx"
 	],
 	"find":
 	{
-		"height": 36.0
+		"height": 28.0
 	},
 	"find_in_files":
 	{
@@ -822,6 +822,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"(\"------\");\n",
 			"animationSpee",
 			"onUpdate",
 			"counter",
@@ -905,15 +906,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 362,
+						"buffer_size": 384,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								362,
-								362
+								262,
+								262
 							]
 						],
 						"settings":
@@ -934,15 +935,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1907,
+						"buffer_size": 4817,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1254,
-								1254
+								1251,
+								1251
 							]
 						],
 						"settings":
@@ -953,7 +954,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 285.0,
+						"translation.y": 2460.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -961,29 +962,28 @@
 				},
 				{
 					"buffer": 2,
-					"file": "app/importing/JsonImport.hx",
+					"file": "build/data/test.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2029,
+						"buffer_size": 2973,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								155,
-								155
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"haxe-build-id": 0,
-							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
+						"translation.x": -0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -1072,7 +1072,7 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},

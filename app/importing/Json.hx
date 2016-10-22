@@ -7,10 +7,10 @@ typedef JsonPerson= {
 }
 
 typedef JsonGroup = {
-    var children: Null<Array<JsonGroup>>;
+    @:optional var children: Null<Array<JsonGroup>>;
     var members: Null<Array<JsonPerson>>;
     var name: String;
-    var color: Null<String>;
+    @:optional var color: Null<String>;
 }
 
 typedef JsonRoot = {

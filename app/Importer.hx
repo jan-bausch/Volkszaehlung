@@ -27,7 +27,15 @@ class Importer extends CommandLine {
     public function runDefault() {
         if (out == null) out = "../build/data/" + Std.string(Date.now().getFullYear())+"-"+Std.string(Date.now().getMonth())+"-"+Std.string(Date.now().getDate())+".json";
 
-        //
+
+        //Write basic json data
+        this.data = {
+                    year: Date.now().getFullYear(),
+                    week: Date.now().getMonth() * 4,
+                    groups: new Array<JsonGroup>()
+                    };
+
+        //Go through files
         for (path in FileSystem.readDirectory(dir)) {
             if (Path.extension(path) != "csv") continue;
             this.readFile(path);
@@ -35,8 +43,11 @@ class Importer extends CommandLine {
 
         //Save json
         Sys.println("------");
-        Sys.println("...Exporting to: \"" + FileSystem.absolutePath(out) +"\"");
-
+        Sys.println("...Exporting to: \"" + out +"\"");
+        //Stringfy json with indentation
+        var jsonString: String = Json.stringify(this.data, null, "\t");
+        //Saving
+        File.saveContent(out, jsonString);
     }
 
     //Read content of file
@@ -53,17 +64,85 @@ class Importer extends CommandLine {
         //Read full name of sippe
         var sippe: String = rows[9].split(";")[1];
 
+        Sys.println("Reading Stamm " + stamm + ", Sippe " + sippe);
+
+        //Get stamm reference
+        var stammJson: JsonGroup = this.addStamm(stamm);
+
+        //Add sippe
+        var sippeJson: JsonGroup =  {
+                                    name: sippe,
+                                    color: "blue",
+                                    children: new Array<JsonGroup>(),
+                                    members: new Array<JsonPerson>()
+                                    };
+        stammJson.children.push(sippeJson);
+
         //Read members
         var i: Int = 12;
         while (i<rows.length) {
             var cells: Array<String> = rows[i].split(";");
             if (cells.length < 2) break;
-            Sys.println(cells[0]);
+
+            //Read cell information of member
+            var name: String = cells[0];
+            var age: Int = Std.parseInt(cells[1]);
+            var rang: Int = Std.parseInt(cells[2]);
+            var groups: Array<String> = StringTools.replace(cells[3], " ", "").split(",");
+
+            var personJson: JsonPerson =    {
+                                            name: "joe",
+                                            rank: 0,
+                                            age: 12
+                                            };
+
+            for (gruppeName in groups) {
+                var gruppeJson: JsonGroup = this.addGruppe(gruppeName, sippeJson);
+                gruppeJson.members.push(personJson);
+            }
+
             i++;
         }
     }
 
+    //Returns reference of json-data of stamm. Adds stamm, if it doesn't exist yet
+    private function addStamm(name: String) : JsonGroup {
 
+        var reference: JsonGroup = null;
+        for (stamm in this.data.groups) if (stamm.name == name) reference = stamm;
+
+        //If it doesn't exist yet, create
+        if (reference == null) {
+            reference = {
+                        name: name,
+                        color: "red",
+                        children: new Array<JsonGroup>(),
+                        members: new Array<JsonPerson>()
+                        };
+            this.data.groups.push(reference);
+        }
+
+        return reference;
+    }
+
+
+    //Returns reference of json-data of gruppe. Adds gruppe to sippe, if it doesn't exist yet
+    private function addGruppe(name: String, sippe: JsonGroup) : JsonGroup {
+
+        var reference: JsonGroup = null;
+        for (group in sippe.children) if (group.name == name) reference = group;
+
+        //If it doesn't exist yet, create
+        if (reference == null) {
+            reference = {
+                        name: "joe",
+                        members: new Array<JsonPerson>()
+                        };
+            sippe.children.push(reference);
+        }
+
+        return reference;
+    }
 
 
     public function help() {
