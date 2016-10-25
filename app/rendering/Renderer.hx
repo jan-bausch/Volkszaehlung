@@ -1,4 +1,4 @@
-package app.rendering;
+    package app.rendering;
 
 import app.simulation.Group;
 import app.simulation.Person;
@@ -37,6 +37,9 @@ class Renderer{
 
     private var SCROLL_SPEED: Float = 0.1;
 
+    //Show statistics for the first ... groups
+    private var STATISTIC_LEVEL_THRESHOLD: Int = 2;
+
     public function new(canvasId: String) {
 
         this.canvas = cast Browser.document.getElementById(canvasId);
@@ -64,9 +67,11 @@ class Renderer{
         //Register events
         Events.WEEK_START.add(this.onWeekStart);
         Events.GRAPH_UPDATE.add(this.onUpdateGraph);
+        Events.APP_START.add(onAppStart);
+        Events.APP_PAUSE.add(onAppPause);
 
         Browser.document.getElementById("start").onclick = this.onStartClick;
-        Browser.document.getElementById("reset").onclick = this.onStopClick;
+        Browser.document.getElementById("reset").onclick = this.onResetClick;
         Browser.document.onkeypress = this.onKeyDown;
 
         this.scale();
@@ -135,6 +140,7 @@ class Renderer{
     }
 
     public function update(elapsed: Float) {
+        if (App.simulation == null) return;
         animation += this.animationSpeed * elapsed;
 
         this.renderBuffer();
@@ -189,6 +195,23 @@ class Renderer{
         this.canvas.height = Browser.window.innerHeight;
     }
 
+    //Display available json files, that can be loaded
+    public function displayFiles(files: Array<String>) {
+        var list: Element = Browser.document.getElementById("button-load-list");
+        list.innerHTML = ""; //Empty list
+
+        for (file in files) {
+            var li: LIElement = Browser.document.createLIElement();
+            li.onclick = function (e: MouseEvent) {this.onLoadListClick(file);};
+            li.innerHTML =  "<a href='#'>"+file+"</a>";
+            list.appendChild(li);
+        }
+    }
+
+    private function onLoadListClick(file: String) {
+        App.load("data/" + file);
+    }
+
     /* DOM-specific events */
     private function onWeekStart(week: Int) {
         Browser.document.getElementById("now-week").innerHTML = Std.string(week % 52 + App.simulation.startWeek);
@@ -202,20 +225,22 @@ class Renderer{
 
     private function updateListGraph() {
         var list: UListElement = Browser.document.createUListElement();
-        this.recursiveUpdateList(App.simulation.groups, list);
         Browser.document.getElementById("graph-list").innerHTML = "";
-        Browser.document.getElementById("graph-list").appendChild(list);
+        if (App.simulation != null ) {
+            this.recursiveUpdateList(App.simulation.groups, list, this.STATISTIC_LEVEL_THRESHOLD);
+            Browser.document.getElementById("graph-list").appendChild(list);
+        }
     }
-    private function recursiveUpdateList(group: Group, ul: UListElement) {
+    private function recursiveUpdateList(group: Group, ul: UListElement, deepness: Int) {
 
         for (child in group.children) {
             var li: LIElement = Browser.document.createLIElement();
             li.innerHTML = child.name + "<span class=\"list-count\">" + child.count + "</span>";
 
             //Call children recursivly
-            if (child.children.length != 0) {
+            if (child.children.length != 0 && deepness > 1) {
                 var newUL: UListElement = Browser.document.createUListElement();
-                recursiveUpdateList(child, newUL);
+                recursiveUpdateList(child, newUL, deepness-1);
                 li.appendChild(newUL);
             }
 
@@ -228,12 +253,8 @@ class Renderer{
         if (e.keyCode == 32) {
             if (App.running) {
                 App.pause();
-                Browser.document.getElementById("start").className = StringTools.replace(Browser.document.getElementById("start").className, " active","");
-                Browser.document.getElementById("start").innerHTML = "Starten";
             } else {
                 App.start();
-                Browser.document.getElementById("start").className += " active";
-                Browser.document.getElementById("start").innerHTML = "Pausieren";
             }
         }
     }
@@ -241,18 +262,24 @@ class Renderer{
     private function onStartClick(e: MouseEvent) {
         if (App.running) {
             App.pause();
-            Browser.document.getElementById("start").className = StringTools.replace(Browser.document.getElementById("start").className, " active","");
-            Browser.document.getElementById("start").innerHTML = "Starten";
         } else {
             App.start();
-            Browser.document.getElementById("start").className += " active";
-            Browser.document.getElementById("start").innerHTML = "Pausieren";
         }
         Browser.document.getElementById("start").blur();
     }
 
-    private function onStopClick(e: MouseEvent) {
+    private function onAppStart() {
+        Browser.document.getElementById("start").className += " active";
+        Browser.document.getElementById("start").innerHTML = "Pausieren";
+    }
 
+    private function onAppPause() {
+        Browser.document.getElementById("start").className = StringTools.replace(Browser.document.getElementById("start").className, " active","");
+        Browser.document.getElementById("start").innerHTML = "Starten";
+    }
+
+    private function onResetClick(e: MouseEvent) {
+        App.reset();
     }
 
 }

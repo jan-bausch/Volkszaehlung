@@ -10,11 +10,16 @@ import haxe.Http;
 import haxe.Json;
 
 
-
 class JsonImport {
 
 
     private static var persons: Map<String, Person>;
+
+    public static function loadFiles() {
+        var path: String = "data/files.php";
+        var content: String = Http.requestUrl(path);
+        return content.split("\n");
+    }
 
     public static function importJson(path: String) {
         
@@ -34,14 +39,14 @@ class JsonImport {
         for (group in groups) {
 
 
-            var newgroup = new Group(group.name, group.color);
+            var newgroup = new Group(StringTools.htmlUnescape(group.name), group.color);
 
             if (group.children != null) parse(group.children, newgroup);
 
             if (group.members != null) {
                 for (newmember in group.members) {
 
-                    newgroup.addMember( getPersonReference(newmember.name, newmember.age, newmember.rank) );
+                    newgroup.addMember( getPersonReference(StringTools.htmlUnescape(newmember.name), newmember.age, newmember.rank) );
                 }
             }
 

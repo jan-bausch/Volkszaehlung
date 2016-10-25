@@ -20,9 +20,11 @@ class Importer extends CommandLine {
     /**
         Input directory (default: /)
     **/
-    public var dir: String = "";
+    public var dir: String = "../import/";
 
     private var data: JsonRoot;
+
+    private static var colorMap: Map<String, String> = ["IV" => "rgba(131,80,46,0.8)"];
 
     public function runDefault() {
         if (out == null) out = "../build/data/" + Std.string(Date.now().getFullYear())+"-"+Std.string(Date.now().getMonth())+"-"+Std.string(Date.now().getDate())+".json";
@@ -72,7 +74,7 @@ class Importer extends CommandLine {
         //Add sippe
         var sippeJson: JsonGroup =  {
                                     name: sippe,
-                                    color: "blue",
+                                    color: this.getColor(sippe),
                                     children: new Array<JsonGroup>(),
                                     members: new Array<JsonPerson>()
                                     };
@@ -85,13 +87,13 @@ class Importer extends CommandLine {
             if (cells.length < 2) break;
 
             //Read cell information of member
-            var name: String = cells[0];
+            var name: String = StringTools.urlEncode(cells[0]);
             var age: Int = Std.parseInt(cells[1]);
             var rang: Int = Std.parseInt(cells[2]);
             var groups: Array<String> = StringTools.replace(cells[3], " ", "").split(",");
 
             var personJson: JsonPerson =    {
-                                            name: "joe",
+                                            name: name,
                                             rank: 0,
                                             age: 12
                                             };
@@ -107,6 +109,8 @@ class Importer extends CommandLine {
 
     //Returns reference of json-data of stamm. Adds stamm, if it doesn't exist yet
     private function addStamm(name: String) : JsonGroup {
+        //Encode variable to avoid conflic with json
+        name = StringTools.urlEncode(name);
 
         var reference: JsonGroup = null;
         for (stamm in this.data.groups) if (stamm.name == name) reference = stamm;
@@ -115,7 +119,7 @@ class Importer extends CommandLine {
         if (reference == null) {
             reference = {
                         name: name,
-                        color: "red",
+                        color: this.getColor(name),
                         children: new Array<JsonGroup>(),
                         members: new Array<JsonPerson>()
                         };
@@ -128,6 +132,8 @@ class Importer extends CommandLine {
 
     //Returns reference of json-data of gruppe. Adds gruppe to sippe, if it doesn't exist yet
     private function addGruppe(name: String, sippe: JsonGroup) : JsonGroup {
+        //Encode variable to avoid conflic with json
+        name = StringTools.urlEncode(name);
 
         var reference: JsonGroup = null;
         for (group in sippe.children) if (group.name == name) reference = group;
@@ -135,7 +141,7 @@ class Importer extends CommandLine {
         //If it doesn't exist yet, create
         if (reference == null) {
             reference = {
-                        name: "joe",
+                        name: name,
                         members: new Array<JsonPerson>()
                         };
             sippe.children.push(reference);
@@ -144,6 +150,11 @@ class Importer extends CommandLine {
         return reference;
     }
 
+    //Returns color-code of group
+    private function getColor(name: String) : String {
+        var color: Null<String> = Importer.colorMap.get(StringTools.htmlUnescape(name));
+        return color == null ? "yellow" : color;
+    }
 
     public function help() {
         Sys.println(this.showUsage());

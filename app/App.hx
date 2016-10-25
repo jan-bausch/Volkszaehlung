@@ -10,37 +10,53 @@ import js.Browser;
 class App {
 
     public static var simulation: Simulation;
+    public static var source: String = "";
     public static var renderer: Renderer;
 
     public static var running: Bool = false;
     private static var oldTime: Float = 0;
     private static var weeklyTime: Float = 0;
+
     private static var SIMULATION_SPEED: Float = 300; //Time in ms a week is long
 
     public static function initialize() {
 
-        simulation = new Simulation();
-
-        //Import Json
-        JsonImport.importJson("data/test.json");
 
         //Start rendering
         renderer = new Renderer("canvas");
+
+        //Load available files
+        renderer.displayFiles(JsonImport.loadFiles());
 
         //Start loop
         App.update(0);
     }
 
+    public static function load(path: String) {
+        App.pause();
+        //Reset simulation
+        simulation = new Simulation();
+
+        //Import json
+        JsonImport.importJson(path);
+        source = path;
+    }
+
     public static function start() {
         running = true;
+        Events.APP_START.dispatch();
+        Events.GRAPH_UPDATE.dispatch();
     }
 
     public static function pause() {
         running = false;
+        Events.APP_PAUSE.dispatch();
+        Events.GRAPH_UPDATE.dispatch();
     }
 
     public static function reset() {
-        pause();
+        //Reload current json file
+        App.load(source);
     }
 
     public static function update(time: Float) : Bool {

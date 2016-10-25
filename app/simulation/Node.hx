@@ -6,8 +6,8 @@ class Node {
     public var distance: Float;
     public var rotation: Float;
 
-    public static var minSize: Float = 10;
-    public static var radius: Float = 0.6;
+    public static var minSize: Float = 2;
+    public static var radius: Float = 0.7;
     public static var margin: Float = 1.2;    
 
     public function new() {
