@@ -1,4 +1,4 @@
-build/data/*
+build/data/*.json
 !build/data/example.json
 !build/data/test.json
 build/main.js
