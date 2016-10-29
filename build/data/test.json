@@ -1,0 +1,79 @@
+{
+    "year": 2016,
+    "week": 1,
+
+    "groups" : [
+
+        {
+            "name": "Stamm IV",
+            "color": "rgba(131,80,46,0.8)",
+            "children": [
+
+                {
+                    "name": "Sippe Parzival",
+                    "color": "rgba(34,139,34,0.8)",
+                    "children": [
+
+                        {
+                            "name": "Feuerfüchse",
+                            "members": [
+                                {"name": "jfb", "age": 18, "rank": 4},
+                                {"name": "tt", "age": 19, "rank": 4}
+
+                            ]
+                        },
+                        {
+                            "name": "Huskies",
+                            "members": [
+                                {"name": "jfb"},
+                                {"name": "srad", "age": 9, "rank": 0},
+                                {"name": "awdr", "age": 10, "rank": 0},
+                                {"name": "awd", "age": 11, "rank": 0},
+                                {"name": "srd", "age": 10, "rank": 0},
+                                {"name": "rab", "age": 10, "rank": 0}
+                            ]
+                        }
+
+                    ]
+                },
+                {
+                    "name": "Sippe Ulrich von Hutten",
+                    "color": "rgba(161,0,0,0.8)",
+                    "children": [
+
+                        {
+                            "name": "Orca",
+                            "members": [
+                                {"name": "mp", "age": 22, "rank": 5},
+                                {"name": "tts", "age": 19, "rank": 4}
+                                
+                            ]
+                        },
+                        {
+                            "name": "Eisvögel",
+                            "members": [
+                                {"name": "mp"},
+                                {"name": "sr", "age": 11, "rank": 2},
+                                {"name": "ajw", "age": 13, "rank": 2},
+                                {"name": "srjjk", "age": 13, "rank": 2},
+                                {"name": "aw", "age": 11, "rank": 2},
+                                {"name": "srzu", "age": 12, "rank": 2},
+                                {"name": "rpb", "age": 12, "rank": 2},
+                                {"name": "alw", "age": 13, "rank": 2},
+                                {"name": "sjr", "age": 14, "rank": 2},
+                                {"name": "gaw", "age": 12, "rank": 2},
+                                {"name": "esr", "age": 11, "rank": 2},
+                                {"name": "raw", "age": 13, "rank": 2},
+                                {"name": "srq", "age": 12, "rank": 2},
+                                {"name": "rsb", "age": 11, "rank": 2}
+                            ]
+                        }
+
+                    ]
+                }
+        
+            ]
+        }
+
+    ]
+}
