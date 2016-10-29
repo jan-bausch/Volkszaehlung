@@ -24,10 +24,33 @@ class Importer extends CommandLine {
 
     private var data: JsonRoot;
 
-    private static var colorMap: Map<String, String> = ["IV" => "rgba(131,80,46,0.8)"];
+    private static var colorMap: Map<String, String> = [
+        "IV" => "rgba(131,80,46,0.8)",
+        "Parzival" => "rgba(34,139,34,0.8)",
+        "Ulrich von Hutten" => "rgba(161,0,0,0.8)",
+        "I" => "rgba(24,48,216,0.8)",
+        "Philipp Melanchthon" => "rgba(131,80,46,0.8)",
+        "Martin Luther" => "rgba(131,80,46,0.8)",
+        "Ulrich Zwingli" => "rgba(131,80,46,0.8)",
+    ];
+
+    private static var rankMap: Map<String, Int> = [
+        "Wö" => 0,
+        "N" => 0,
+        "Kn" => 1,
+        "Knappe" => 1,
+        "Sp" => 2,
+        "SP" => 2,
+        "Späher" => 2,
+        "P" => 3,
+        "Pf" => 3,
+        "aP" => 3,
+        "Kt" => 4,
+        "Fm" => 5
+    ];
 
     public function runDefault() {
-        if (out == null) out = "../build/data/" + Std.string(Date.now().getFullYear())+"-"+Std.string(Date.now().getMonth())+"-"+Std.string(Date.now().getDate())+".json";
+        if (out == null) out = "../build/data/" + Std.string(Date.now().getFullYear())+"-"+Std.string(Date.now().getMonth()+1)+"-"+Std.string(Date.now().getDate())+".json";
 
 
         //Write basic json data
@@ -35,7 +58,7 @@ class Importer extends CommandLine {
                     year: Date.now().getFullYear(),
                     week: Date.now().getMonth() * 4,
                     groups: new Array<JsonGroup>()
-                    };
+                    };          
 
         //Go through files
         for (path in FileSystem.readDirectory(dir)) {
@@ -87,14 +110,14 @@ class Importer extends CommandLine {
             if (cells.length < 2) break;
 
             //Read cell information of member
-            var name: String = StringTools.urlEncode(cells[0]);
+            var name: String = cells[0];
             var age: Int = Std.parseInt(cells[1]);
-            var rang: Int = Std.parseInt(cells[2]);
-            var groups: Array<String> = StringTools.replace(cells[3], " ", "").split(",");
+            var rank: String = cells[2];
+            var groups: Array<String> = StringTools.replace(StringTools.replace(cells[3], " ", ""), "\r", "").split(",");
 
             var personJson: JsonPerson =    {
                                             name: name,
-                                            rank: 0,
+                                            rank: this.getRank(rank),
                                             age: 12
                                             };
 
@@ -109,9 +132,6 @@ class Importer extends CommandLine {
 
     //Returns reference of json-data of stamm. Adds stamm, if it doesn't exist yet
     private function addStamm(name: String) : JsonGroup {
-        //Encode variable to avoid conflic with json
-        name = StringTools.urlEncode(name);
-
         var reference: JsonGroup = null;
         for (stamm in this.data.groups) if (stamm.name == name) reference = stamm;
 
@@ -132,9 +152,6 @@ class Importer extends CommandLine {
 
     //Returns reference of json-data of gruppe. Adds gruppe to sippe, if it doesn't exist yet
     private function addGruppe(name: String, sippe: JsonGroup) : JsonGroup {
-        //Encode variable to avoid conflic with json
-        name = StringTools.urlEncode(name);
-
         var reference: JsonGroup = null;
         for (group in sippe.children) if (group.name == name) reference = group;
 
@@ -150,10 +167,25 @@ class Importer extends CommandLine {
         return reference;
     }
 
+    private function getRank(name: String) : Int {
+        var rank: Null<Int> = Importer.rankMap.get(name);
+        if (rank == null) {
+            trace("Unknown rank identifier: \"" + name + "\"");
+            return -1;
+        } else {
+            return rank;
+        }
+    }
+
     //Returns color-code of group
     private function getColor(name: String) : String {
-        var color: Null<String> = Importer.colorMap.get(StringTools.htmlUnescape(name));
-        return color == null ? "yellow" : color;
+        var color: Null<String> = Importer.colorMap.get(name);
+        if (color == null) {
+            trace("Unknown color identifier: \"" + name + "\"");
+            return "null";
+        } else {
+            return color;
+        }
     }
 
     public function help() {

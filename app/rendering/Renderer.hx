@@ -51,7 +51,7 @@ class Renderer{
         this.canvas.onmousewheel = this.onMouseScroll;
 
         this.zoom = 0.5;
-        this.offsetX = -200;
+        this.offsetX = 0;
         this.offsetY = 0;
         this.dragging = false;
 
@@ -69,6 +69,7 @@ class Renderer{
         Events.GRAPH_UPDATE.add(this.onUpdateGraph);
         Events.APP_START.add(onAppStart);
         Events.APP_PAUSE.add(onAppPause);
+        Events.APP_RESET.add(onAppReset);
 
         Browser.document.getElementById("start").onclick = this.onStartClick;
         Browser.document.getElementById("reset").onclick = this.onResetClick;
@@ -125,17 +126,20 @@ class Renderer{
     public function render() {
 
 
-        //Render buffer
-        var buffersize: Int = 1000;
+        //Render vars
+        var buffersize: Int = 1000; //Size of buffer image
+        //Calculate point of zoom based on translation of the graph and the mouse position
+        var _offsetX: Int = this.offsetX-200;
+        var _offsetY: Int = this.offsetY;
         this.ctx.clearRect(0,0,this.ctx.canvas.width, this.ctx.canvas.height);
 
-        this.ctx.translate((this.canvas.width - BUFFER_SIZE * this.zoom)  / 2 + this.offsetX, (this.canvas.height - BUFFER_SIZE * this.zoom)  / 2  + this.offsetY);
+        this.ctx.translate((this.canvas.width - BUFFER_SIZE * this.zoom)  / 2 + _offsetX, (this.canvas.height - BUFFER_SIZE * this.zoom)  / 2  + _offsetY);
         this.ctx.scale(this.zoom, this.zoom);
 
         this.ctx.drawImage(this.buffer.canvas, 0, 0, BUFFER_SIZE, BUFFER_SIZE);
 
         this.ctx.scale(1/this.zoom, 1/this.zoom);
-        this.ctx.translate(-((this.canvas.width - BUFFER_SIZE * this.zoom)  / 2 + this.offsetX), -((this.canvas.height - BUFFER_SIZE * this.zoom)  / 2  + this.offsetY));
+        this.ctx.translate(-((this.canvas.width - BUFFER_SIZE * this.zoom)  / 2 + _offsetX), -((this.canvas.height - BUFFER_SIZE * this.zoom)  / 2  + _offsetY));
 
     }
 
@@ -214,8 +218,11 @@ class Renderer{
 
     /* DOM-specific events */
     private function onWeekStart(week: Int) {
-        Browser.document.getElementById("now-week").innerHTML = Std.string(week % 52 + App.simulation.startWeek);
-        Browser.document.getElementById("now-year").innerHTML = Std.string(Math.floor(week / 52) + App.simulation.startYear);
+        //Update week display
+        Browser.document.getElementById("now-week").innerHTML = Std.string((week + App.simulation.startWeek) % 52 + 1);
+        Browser.document.getElementById("now-year").innerHTML = Std.string(Math.floor((week + App.simulation.startWeek) / 52) + App.simulation.startYear);
+        var rounded: String = Std.string(Math.fround(week / 52 * 10));
+        Browser.document.getElementById("delta-week").innerHTML = (rounded.charAt(1) == null ? "0" : rounded.charAt(0)) + "," + (rounded.charAt(rounded.length - 1))  + "j";
     }
 
 
@@ -271,11 +278,23 @@ class Renderer{
     private function onAppStart() {
         Browser.document.getElementById("start").className += " active";
         Browser.document.getElementById("start").innerHTML = "Pausieren";
+
+        //Set start week display
+        Browser.document.getElementById("start-week").innerHTML = Std.string(App.simulation.startWeek);
+        Browser.document.getElementById("start-year").innerHTML = Std.string(App.simulation.startYear);
     }
 
     private function onAppPause() {
         Browser.document.getElementById("start").className = StringTools.replace(Browser.document.getElementById("start").className, " active","");
         Browser.document.getElementById("start").innerHTML = "Starten";
+    }
+
+    private function onAppReset() {
+        //Reset week displays
+        Browser.document.getElementById("now-week").innerHTML = "-";
+        Browser.document.getElementById("now-year").innerHTML = "-";
+        Browser.document.getElementById("start-week").innerHTML = "-";
+        Browser.document.getElementById("start-year").innerHTML = "-";
     }
 
     private function onResetClick(e: MouseEvent) {

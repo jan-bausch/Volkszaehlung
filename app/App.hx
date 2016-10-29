@@ -43,20 +43,24 @@ class App {
     }
 
     public static function start() {
+        if (App.simulation == null) return; 
         running = true;
         Events.APP_START.dispatch();
         Events.GRAPH_UPDATE.dispatch();
     }
 
     public static function pause() {
+        if (App.simulation == null) return; 
         running = false;
         Events.APP_PAUSE.dispatch();
         Events.GRAPH_UPDATE.dispatch();
     }
 
     public static function reset() {
+        if (App.simulation == null) return; 
         //Reload current json file
         App.load(source);
+        Events.APP_RESET.dispatch();
     }
 
     public static function update(time: Float) : Bool {
