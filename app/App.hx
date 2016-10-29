@@ -1,6 +1,7 @@
 package app;
 
 import app.simulation.Simulation;
+import app.simulation.Probability;
 import app.importing.JsonImport;
 import app.rendering.Renderer;
 import app.Events;
@@ -28,6 +29,7 @@ class App {
         //Load available files
         renderer.displayFiles(JsonImport.loadFiles());
 
+
         //Start loop
         App.update(0);
     }
@@ -36,7 +38,7 @@ class App {
         App.pause();
         //Reset simulation
         simulation = new Simulation();
-
+        Events.APP_LOAD.dispatch();
         //Import json
         JsonImport.importJson(path);
         source = path;
@@ -61,6 +63,24 @@ class App {
         //Reload current json file
         App.load(source);
         Events.APP_RESET.dispatch();
+    }
+
+    public static function getConstants() : Map<String, Float>{
+
+        var fields: Map<String, Float> = new Map<String, Float>();
+
+        for (field in Type.getClassFields(Probability)) {
+            if (!Reflect.isFunction(Reflect.field(Probability,field))) {
+                fields.set(field, Reflect.field(Probability,field));
+            }
+        }  
+
+        return fields;
+    }
+
+
+    public static function setConstant(field: String, value: Float){
+        Reflect.setProperty(Probability, field, value);
     }
 
     public static function update(time: Float) : Bool {

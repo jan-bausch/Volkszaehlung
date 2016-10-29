@@ -70,10 +70,14 @@ class Renderer{
         Events.APP_START.add(onAppStart);
         Events.APP_PAUSE.add(onAppPause);
         Events.APP_RESET.add(onAppReset);
+        Events.APP_LOAD.add(onAppLoad);
 
         Browser.document.getElementById("start").onclick = this.onStartClick;
         Browser.document.getElementById("reset").onclick = this.onResetClick;
         Browser.document.onkeypress = this.onKeyDown;
+
+        //Display constants
+        this.displayConstants(App.getConstants());
 
         this.scale();
     }
@@ -212,6 +216,29 @@ class Renderer{
         }
     }
 
+    public function displayConstants(fields: Map<String, Float>) {
+                
+        var ul: UListElement = Browser.document.createUListElement();
+
+        for (field in fields.keys()) {
+            var li: LIElement = Browser.document.createLIElement();
+            li.innerHTML = "<label for=\"constant-"+field+"\">"+field+":</label>";
+
+            var button: js.html.InputElement = Browser.document.createInputElement();
+            button.className = "form-control";
+            button.setAttribute("value", Std.string(fields.get(field)));
+            button.id = "constant-"+field;
+            button.onchange = function (e: js.html.EventListener) {
+                App.setConstant(field, Std.parseFloat(button.value));
+            };
+
+            li.appendChild(button);
+            ul.appendChild(li);
+        }        
+    
+        Browser.document.getElementById("constants").appendChild(ul);
+    }
+
     private function onLoadListClick(file: String) {
         App.load("data/" + file);
     }
@@ -263,6 +290,7 @@ class Renderer{
             } else {
                 App.start();
             }
+            e.preventDefault();
         }
     }
 
@@ -289,6 +317,12 @@ class Renderer{
         Browser.document.getElementById("start").innerHTML = "Starten";
     }
 
+    private function onAppLoad() {
+        //Enable buttons
+        Browser.document.getElementById("start").removeAttribute("disabled");
+        Browser.document.getElementById("reset").removeAttribute("disabled");
+    }
+
     private function onAppReset() {
         //Reset week displays
         Browser.document.getElementById("now-week").innerHTML = "-";
@@ -296,6 +330,7 @@ class Renderer{
         Browser.document.getElementById("start-week").innerHTML = "-";
         Browser.document.getElementById("start-year").innerHTML = "-";
     }
+
 
     private function onResetClick(e: MouseEvent) {
         App.reset();

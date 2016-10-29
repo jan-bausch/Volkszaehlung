@@ -8,6 +8,7 @@ class Events{
     public static var APP_PAUSE = new Signal0();
     public static var APP_START = new Signal0();
     public static var APP_RESET = new Signal0();
+    public static var APP_LOAD = new Signal0();
 
     public static var GRAPH_UPDATE = new Signal0();
 

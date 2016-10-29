@@ -37,6 +37,7 @@ class Person {
     }
 
     public function simulate() {
+
         switch (this.rank) {
 
             case Rank.Neuling:

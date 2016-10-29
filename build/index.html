@@ -24,27 +24,26 @@
             <br />
             <div class="btn-group" role="group" id="controls">
                 <button type="button" id="button-load" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">+</button>
-                  <ul class="dropdown-menu" id="button-load-list" aria-labelledby="button-load">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                  </ul>
-                <button type="button" id="start" class="btn btn-success">Starten</button>
-                <button type="button" id="reset" class="btn btn-danger">Zurücksetzen</button>          
+                    <ul class="dropdown-menu" id="button-load-list" aria-labelledby="button-load">
+                    </ul>
+                <button type="button" id="start" class="btn btn-success" disabled>Starten</button>
+                <button type="button" id="reset" class="btn btn-danger" disabled>Zurücksetzen</button>          
             </div>
 
             <hr class="divider">
 
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active"><a href="#">Übersicht</a></li>
-                <li role="presentation"><a href="#">Verlauf</a></li>
-                <li role="presentation"><a href="#">Torte</a></li>
+                <li role="presentation" class="active"><a data-toggle="tab" href="#graph-list">Übersicht</a></li>
+                <li role="presentation"><a data-toggle="tab" href="#graph-time">Verlauf</a></li>
+                <li role="presentation"><a data-toggle="tab" href="#constants">Konstanten</a></li>
             </ul>
 
-            <div id="graph-container">
-                <div id="graph-list">
+            <div id="graph-container" class="tab-content">
+                <div id="graph-list" class="tab-pane fade in active">
+                </div> 
+                <div id="graph-time" class="tab-pane fade">
+                </div> 
+                <div id="constants" class="tab-pane fade">
                 </div> 
             </div>
 
