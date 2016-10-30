@@ -25,18 +25,35 @@ class Importer extends CommandLine {
     private var data: JsonRoot;
 
     private static var colorMap: Map<String, String> = [
+        "I" => "rgba(4,127,8,0.8)",
+        "Philipp Melanchthon" => "green",
+        "Martin Luther" => "blue",
+        "Ulrich Zwingli" => "white",
+
+        "II" => "rgba(87, 127, 170,0.8)",
+        "Siegfried" => "red",
+        "Wulfila" => "brown",
+
         "IV" => "rgba(131,80,46,0.8)",
         "Parzival" => "rgba(34,139,34,0.8)",
         "Ulrich von Hutten" => "rgba(161,0,0,0.8)",
-        "I" => "rgba(24,48,216,0.8)",
-        "Philipp Melanchthon" => "rgba(131,80,46,0.8)",
-        "Martin Luther" => "rgba(131,80,46,0.8)",
-        "Ulrich Zwingli" => "rgba(131,80,46,0.8)",
+
+        "V" => "rgba(0, 0, 0,0.8)",
+        "Hans Scholl" => "green",
+
+        "VI" => "rgba(255,255,255,0.7)",
+        "Zinzendorf" => "green",
+        "Dietrich Bonhoeffer" => "black",
+        "Dietrich von Bern" => "red",
     ];
 
     private static var rankMap: Map<String, Int> = [
         "Wö" => 0,
+        "Wölfling" => 0,
+        "wölfling" => 0,
         "N" => 0,
+        "Neuling" => 0,
+        "neuling" => 0,
         "Kn" => 1,
         "Knappe" => 1,
         "Sp" => 2,
@@ -46,8 +63,16 @@ class Importer extends CommandLine {
         "Pf" => 3,
         "aP" => 3,
         "Kt" => 4,
-        "Fm" => 5
+        "Kt (zbV)" => 4,
+        "Fm" => 5,
+        "Fm (zbV)" => 5,
+        "Fm/Lstf" => 5
     ];
+
+    private static var blacklistGroup: Array<String> = [
+        "zbV", "", "ZbV"
+    ];
+
 
     public function runDefault() {
         if (out == null) out = "../build/data/" + Std.string(Date.now().getFullYear())+"-"+Std.string(Date.now().getMonth()+1)+"-"+Std.string(Date.now().getDate())+".json";
@@ -105,23 +130,31 @@ class Importer extends CommandLine {
 
         //Read members
         var i: Int = 12;
+        var lastAge: Int = -1;
         while (i<rows.length) {
             var cells: Array<String> = rows[i].split(";");
             if (cells.length < 2) break;
 
             //Read cell information of member
             var name: String = cells[0];
-            var age: Int = Std.parseInt(cells[1]);
+            var age: String = cells[1];
             var rank: String = cells[2];
             var groups: Array<String> = StringTools.replace(StringTools.replace(cells[3], " ", ""), "\r", "").split(",");
+
+            var _age: Int = this.getAge(age);
+            //If age is not set, copy from last iteration
+            if (_age == -1) _age = lastAge;
+            lastAge = _age; 
+
 
             var personJson: JsonPerson =    {
                                             name: name,
                                             rank: this.getRank(rank),
-                                            age: 12
+                                            age: this.getAge(age)
                                             };
 
             for (gruppeName in groups) {
+                if (blacklistGroup.indexOf(gruppeName) != -1) continue;
                 var gruppeJson: JsonGroup = this.addGruppe(gruppeName, sippeJson);
                 gruppeJson.members.push(personJson);
             }
@@ -168,6 +201,7 @@ class Importer extends CommandLine {
     }
 
     private function getRank(name: String) : Int {
+        name = StringTools.trim(name);
         var rank: Null<Int> = Importer.rankMap.get(name);
         if (rank == null) {
             trace("Unknown rank identifier: \"" + name + "\"");
@@ -175,6 +209,17 @@ class Importer extends CommandLine {
         } else {
             return rank;
         }
+    }
+
+    private function getAge(age: String) : Int {
+        var year: Int = (age.indexOf(".") == -1) ? Std.parseInt(age) : Std.parseInt(age.split(".")[2]);
+
+        if (year == null) {
+            trace("Unknown age identifier: \"" + age + "\", copying age");
+            return -1;
+        }
+
+        return Date.now().getFullYear() - year;
     }
 
     //Returns color-code of group

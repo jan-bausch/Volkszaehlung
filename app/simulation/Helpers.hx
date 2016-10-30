@@ -12,7 +12,7 @@ class Helpers {
     }
 
     public static function seed(s: String) : Float {
-        var seed: Float = (s.charCodeAt(6) == null) ? s.charCodeAt(2) : s.charCodeAt(6);
+        var seed: Float = (s.charCodeAt(1) == null) ? s.charCodeAt(0) : s.charCodeAt(1);
         var seed = (seed * 9301 + 49297) % 233280;
         seed = seed / 233280.0;
         return seed;

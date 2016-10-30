@@ -4,68 +4,40 @@
 		"selected_items":
 		[
 			[
+				"app",
+				"appendChild"
+			],
+			[
+				"vl",
+				"value	String"
+			],
+			[
+				"getEle",
+				"getElementsByTagName(...)	js.html.NodeList"
+			],
+			[
+				"fo",
+				"font-family"
+			],
+			[
+				"fiel",
+				"fields"
+			],
+			[
 				"get",
-				"getRank( name : String )	Int"
+				"getClassFields(...)	Array<String>"
 			],
 			[
-				"e",
-				"exit( code : Int )	Void"
+				"remove",
+				"removeAttribute( name : String )	Void"
 			],
 			[
-				"rou",
-				"fround( v : Float )	Float"
+				"remov",
+				"removeAttribute( name : String )	Void"
 			],
 			[
-				"off",
-				"offsetY	Int"
-			],
-			[
-				"offset",
-				"offsetY	var"
-			],
-			[
-				"onA",
-				"onAppReset"
-			],
-			[
-				"Sign",
-				"Signal0	msignal.Signal"
-			],
-			[
-				"start",
-				"start"
-			],
-			[
-				"update",
-				"updateListGraph	function"
-			],
-			[
-				"AP",
-				"APP_START	Unknown<1>"
-			],
-			[
-				"Js",
-				"JsonImport"
-			],
-			[
-				"S",
-				"STATISTIC_LEVEL_THRESHOLD	Int"
-			],
-			[
-				"h",
-				"htmlUnescape( s : String )	String"
-			],
-			[
-				"enco",
-				"urlEncode"
-			],
-			[
-				"url",
-				"urlEncode( s : String )	String"
-			],
-			[
-				"p",
-				"print( v : Dynamic )	Void"
+				"but",
+				"ButtonElement	class"
 			],
 			[
 				"J",
@@ -152,10 +124,6 @@
 				"updateListGraph(  )	Unknown<14>"
 			],
 			[
-				"remov",
-				"removeMember(...)	Unknown<3>"
-			],
-			[
 				"on",
 				"onkeypress	js.html.EventListener"
 			],
@@ -218,6 +186,10 @@
 			[
 				"offs",
 				"offsetStartX	Int"
+			],
+			[
+				"off",
+				"offsetX	Int"
 			],
 			[
 				"of",
@@ -372,6 +344,10 @@
 				"LOADED_LEVEL	var"
 			],
 			[
+				"Sign",
+				"Signal0	ash.signals"
+			],
+			[
 				"Math",
 				"MathUtil	class"
 			],
@@ -514,27 +490,64 @@
 			[
 				"in",
 				"inertia	Float"
+			],
+			[
+				"fr",
+				"frictionForce_c	var"
+			],
+			[
+				"acc",
+				"acceleration"
+			],
+			[
+				"tract",
+				"tractionForce_c	var"
+			],
+			[
+				"drag",
+				"dragForce_c	var"
+			],
+			[
+				"frc",
+				"frictionForceRear_cy	var"
+			],
+			[
+				"tra",
+				"tractionForce"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": "<!DOCTYPE html>\n<html>\n    \n    <head>\n        <meta charset=\"UTF-8\" />\n        <title>Volkszählung</title>\n        <link rel=\"stylesheet\" href=\"style.css\">\n        <link rel=\"stylesheet\" href=\"lib/bootstrap.min.css\">\n\n    </head>\n    <body>\n\n        <canvas id=\"canvas\">\n            <p> Dieser Browser unterstützt kein Html5! </p>\n        </canvas>\n\n        <div id=\"sidebar\">\n\n            <p class=\"clear\">\n                <span id=\"week-start\">Start: <span id=\"start-week\">-</span>  / <span id=\"start-year\">-</span></span>\n                <span id=\"week-now\">Aktuell: <span id=\"now-week\">-</span>  / <span id=\"now-year\">-</span></span>\n                <span id=\"week-delta\">Delta: <span id=\"delta-week\">-</span></span>\n            </p>\n            <br />\n            <div class=\"btn-group\" role=\"group\" id=\"controls\">\n                <button type=\"button\" id=\"button-load\" class=\"btn btn-default\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">+</button>\n                  <ul class=\"dropdown-menu\" id=\"button-load-list\" aria-labelledby=\"button-load\">\n                    <li><a href=\"#\">Action</a></li>\n                    <li><a href=\"#\">Another action</a></li>\n                    <li><a href=\"#\">Something else here</a></li>\n                    <li role=\"separator\" class=\"divider\"></li>\n                    <li><a href=\"#\">Separated link</a></li>\n                  </ul>\n                <button type=\"button\" id=\"start\" class=\"btn btn-success\">Starten</button>\n                <button type=\"button\" id=\"reset\" class=\"btn btn-danger\">Zurücksetzen</button>          \n            </div>\n\n            <hr class=\"divider\">\n\n            <ul class=\"nav nav-tabs\">\n                <li role=\"presentation\" class=\"active\"><a href=\"#\">Übersicht</a></li>\n                <li role=\"presentation\"><a href=\"#\">Verlauf</a></li>\n                <li role=\"presentation\"><a href=\"#\">Torte</a></li>\n            </ul>\n\n            <div id=\"graph-container\">\n                <div id=\"graph-list\">\n                </div> \n            </div>\n\n\n            <hr class=\"divider\">\n\n\n            <div class=\"panel panel-default\" id=\"legend\">\n                <div class=\"panel-heading\">Legende</div>\n                <table class=\"table\">\n                    <tr>\n                        <td>Wöfling</td>\n                        <td><div style=\"background-color: IndianRed\"></div></td>\n                    </tr>\n                    <tr>\n                        <td>Knappe</td>\n                        <td><div style=\"background-color: Khaki\"></div></td>\n                    </tr>\n                    <tr>\n                        <td>Späher</td>\n                        <td><div style=\"background-color: GreenYellow\"></div></td>\n                    </tr>\n                    <tr>\n                        <td>Pfadfinder</td>\n                        <td><div style=\"background-color: MediumTurquoise\"></div></td>\n                    </tr>\n                    <tr>\n                        <td>Kornett</td>\n                        <td><div style=\"background-color: DodgerBlue\"></div></td>\n                    </tr>\n                    <tr>\n                        <td>Feldmeister</td>\n                        <td><div style=\"background-color: MediumBlue\"></div></td>\n                    </tr>\n                </table>\n            </div>\n\n\n        </div>\n\n        <script src=\"lib/jquery.min.js\"></script>\n        <script src=\"lib/bootstrap.min.js\"></script>\n        <script src=\"main.js\"></script>\n\n    </body>\n</html>",
-			"file": "build/index.html",
-			"file_size": 3514,
-			"file_write_time": 131222469867000796,
+			"file": "app/App.hx",
 			"settings":
 			{
-				"buffer_size": 3508,
-				"line_ending": "Unix"
+				"buffer_size": 2779,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/Importer.hx",
+			"file": "build/index.html",
 			"settings":
 			{
-				"buffer_size": 6205,
+				"buffer_size": 3537,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/rendering/Renderer.hx",
+			"settings":
+			{
+				"buffer_size": 11537,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/simulation/Person.hx",
+			"settings":
+			{
+				"buffer_size": 4166,
 				"line_ending": "Windows"
 			}
 		},
@@ -542,70 +555,8 @@
 			"file": "build/style.css",
 			"settings":
 			{
-				"buffer_size": 1535,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": ".gitignore",
-			"settings":
-			{
-				"buffer_size": 103,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "import.hxml",
-			"settings":
-			{
-				"buffer_size": 90,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/rendering/Renderer.hx",
-			"settings":
-			{
-				"buffer_size": 10244,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "test.json",
-			"file": "build/data/files.php",
-			"file_size": 9,
-			"file_write_time": 131222462812920900,
-			"settings":
-			{
-				"buffer_size": 9,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "(function () { \"use strict\";\nfunction $extend(from, fields) {\n	function Inherit() {} Inherit.prototype = from; var proto = new Inherit();\n	for (var name in fields) proto[name] = fields[name];\n	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;\n	return proto;\n}\nvar HxOverrides = function() { };\nHxOverrides.__name__ = true;\nHxOverrides.cca = function(s,index) {\n	var x = s.charCodeAt(index);\n	if(x != x) return undefined;\n	return x;\n};\nHxOverrides.indexOf = function(a,obj,i) {\n	var len = a.length;\n	if(i < 0) {\n		i += len;\n		if(i < 0) i = 0;\n	}\n	while(i < len) {\n		if(a[i] === obj) return i;\n		i++;\n	}\n	return -1;\n};\nHxOverrides.remove = function(a,obj) {\n	var i = HxOverrides.indexOf(a,obj,0);\n	if(i == -1) return false;\n	a.splice(i,1);\n	return true;\n};\nvar Lambda = function() { };\nLambda.__name__ = true;\nLambda.exists = function(it,f) {\n	var $it0 = it.iterator();\n	while( $it0.hasNext() ) {\n		var x = $it0.next();\n		if(f(x)) return true;\n	}\n	return false;\n};\nvar List = function() {\n	this.length = 0;\n};\nList.__name__ = true;\nList.prototype = {\n	iterator: function() {\n		return { h : this.h, hasNext : function() {\n			return this.h != null;\n		}, next : function() {\n			if(this.h == null) return null;\n			var x = this.h[0];\n			this.h = this.h[1];\n			return x;\n		}};\n	}\n};\nvar IMap = function() { };\nIMap.__name__ = true;\nMath.__name__ = true;\nvar Reflect = function() { };\nReflect.__name__ = true;\nReflect.isFunction = function(f) {\n	return typeof(f) == \"function\" && !(f.__name__ || f.__ename__);\n};\nReflect.compareMethods = function(f1,f2) {\n	if(f1 == f2) return true;\n	if(!Reflect.isFunction(f1) || !Reflect.isFunction(f2)) return false;\n	return f1.scope == f2.scope && f1.method == f2.method && f1.method != null;\n};\nvar Std = function() { };\nStd.__name__ = true;\nStd.string = function(s) {\n	return js_Boot.__string_rec(s,\"\");\n};\nStd[\"int\"] = function(x) {\n	return x | 0;\n};\nvar StringTools = function() { };\nStringTools.__name__ = true;\nStringTools.htmlUnescape = function(s) {\n	return s.split(\"&gt;\").join(\">\").split(\"&lt;\").join(\"<\").split(\"&quot;\").join(\"\\\"\").split(\"&#039;\").join(\"'\").split(\"&amp;\").join(\"&\");\n};\nStringTools.replace = function(s,sub,by) {\n	return s.split(sub).join(by);\n};\nvar app_App = function() { };\napp_App.__name__ = true;\napp_App.initialize = function() {\n	app_App.renderer = new app_rendering_Renderer(\"canvas\");\n	app_App.renderer.displayFiles(app_importing_JsonImport.loadFiles());\n	app_App.update(0);\n};\napp_App.load = function(path) {\n	app_App.pause();\n	app_App.simulation = new app_simulation_Simulation();\n	app_importing_JsonImport.importJson(path);\n	app_App.source = path;\n};\napp_App.start = function() {\n	if(app_App.simulation == null) return;\n	app_App.running = true;\n	app_Events.APP_START.dispatch();\n	app_Events.GRAPH_UPDATE.dispatch();\n};\napp_App.pause = function() {\n	if(app_App.simulation == null) return;\n	app_App.running = false;\n	app_Events.APP_PAUSE.dispatch();\n	app_Events.GRAPH_UPDATE.dispatch();\n};\napp_App.reset = function() {\n	if(app_App.simulation == null) return;\n	app_App.load(app_App.source);\n	app_Events.APP_RESET.dispatch();\n};\napp_App.update = function(time) {\n	var elapsed = time - app_App.oldTime;\n	app_App.oldTime = time;\n	if(app_App.weeklyTime < app_App.SIMULATION_SPEED) app_App.weeklyTime += elapsed; else {\n		app_App.weeklyTime = 0;\n		if(app_App.running) app_App.simulation.simulate();\n	}\n	if(app_App.running) app_App.renderer.update(elapsed); else app_App.renderer.update(0);\n	window.requestAnimationFrame(app_App.update);\n	return true;\n};\nvar msignal_Signal = function(valueClasses) {\n	if(valueClasses == null) valueClasses = [];\n	this.valueClasses = valueClasses;\n	this.slots = msignal_SlotList.NIL;\n	this.priorityBased = false;\n};\nmsignal_Signal.__name__ = true;\nmsignal_Signal.prototype = {\n	add: function(listener) {\n		return this.registerListener(listener);\n	}\n	,addOnce: function(listener) {\n		return this.registerListener(listener,true);\n	}\n	,addWithPriority: function(listener,priority) {\n		if(priority == null) priority = 0;\n		return this.registerListener(listener,false,priority);\n	}\n	,addOnceWithPriority: function(listener,priority) {\n		if(priority == null) priority = 0;\n		return this.registerListener(listener,true,priority);\n	}\n	,remove: function(listener) {\n		var slot = this.slots.find(listener);\n		if(slot == null) return null;\n		this.slots = this.slots.filterNot(listener);\n		return slot;\n	}\n	,removeAll: function() {\n		this.slots = msignal_SlotList.NIL;\n	}\n	,registerListener: function(listener,once,priority) {\n		if(priority == null) priority = 0;\n		if(once == null) once = false;\n		if(this.registrationPossible(listener,once)) {\n			var newSlot = this.createSlot(listener,once,priority);\n			if(!this.priorityBased && priority != 0) this.priorityBased = true;\n			if(!this.priorityBased && priority == 0) this.slots = this.slots.prepend(newSlot); else this.slots = this.slots.insertWithPriority(newSlot);\n			return newSlot;\n		}\n		return this.slots.find(listener);\n	}\n	,registrationPossible: function(listener,once) {\n		if(!this.slots.nonEmpty) return true;\n		var existingSlot = this.slots.find(listener);\n		if(existingSlot == null) return true;\n		return false;\n	}\n	,createSlot: function(listener,once,priority) {\n		if(priority == null) priority = 0;\n		if(once == null) once = false;\n		return null;\n	}\n	,get_numListeners: function() {\n		return this.slots.get_length();\n	}\n};\nvar msignal_Signal0 = function() {\n	msignal_Signal.call(this);\n};\nmsignal_Signal0.__name__ = true;\nmsignal_Signal0.__super__ = msignal_Signal;\nmsignal_Signal0.prototype = $extend(msignal_Signal.prototype,{\n	dispatch: function() {\n		var slotsToProcess = this.slots;\n		while(slotsToProcess.nonEmpty) {\n			slotsToProcess.head.execute();\n			slotsToProcess = slotsToProcess.tail;\n		}\n	}\n	,createSlot: function(listener,once,priority) {\n		if(priority == null) priority = 0;\n		if(once == null) once = false;\n		return new msignal_Slot0(this,listener,once,priority);\n	}\n});\nvar msignal_SlotList = function(head,tail) {\n	this.nonEmpty = false;\n	if(head == null && tail == null) this.nonEmpty = false; else if(head == null) {\n	} else {\n		this.head = head;\n		if(tail == null) this.tail = msignal_SlotList.NIL; else this.tail = tail;\n		this.nonEmpty = true;\n	}\n};\nmsignal_SlotList.__name__ = true;\nmsignal_SlotList.prototype = {\n	get_length: function() {\n		if(!this.nonEmpty) return 0;\n		if(this.tail == msignal_SlotList.NIL) return 1;\n		var result = 0;\n		var p = this;\n		while(p.nonEmpty) {\n			++result;\n			p = p.tail;\n		}\n		return result;\n	}\n	,prepend: function(slot) {\n		return new msignal_SlotList(slot,this);\n	}\n	,insertWithPriority: function(slot) {\n		if(!this.nonEmpty) return new msignal_SlotList(slot);\n		var priority = slot.priority;\n		if(priority >= this.head.priority) return this.prepend(slot);\n		var wholeClone = new msignal_SlotList(this.head);\n		var subClone = wholeClone;\n		var current = this.tail;\n		while(current.nonEmpty) {\n			if(priority > current.head.priority) {\n				subClone.tail = current.prepend(slot);\n				return wholeClone;\n			}\n			subClone = subClone.tail = new msignal_SlotList(current.head);\n			current = current.tail;\n		}\n		subClone.tail = new msignal_SlotList(slot);\n		return wholeClone;\n	}\n	,filterNot: function(listener) {\n		if(!this.nonEmpty || listener == null) return this;\n		if(Reflect.compareMethods(this.head.listener,listener)) return this.tail;\n		var wholeClone = new msignal_SlotList(this.head);\n		var subClone = wholeClone;\n		var current = this.tail;\n		while(current.nonEmpty) {\n			if(Reflect.compareMethods(current.head.listener,listener)) {\n				subClone.tail = current.tail;\n				return wholeClone;\n			}\n			subClone = subClone.tail = new msignal_SlotList(current.head);\n			current = current.tail;\n		}\n		return this;\n	}\n	,find: function(listener) {\n		if(!this.nonEmpty) return null;\n		var p = this;\n		while(p.nonEmpty) {\n			if(Reflect.compareMethods(p.head.listener,listener)) return p.head;\n			p = p.tail;\n		}\n		return null;\n	}\n};\nvar msignal_Signal1 = function(type) {\n	msignal_Signal.call(this,[type]);\n};\nmsignal_Signal1.__name__ = true;\nmsignal_Signal1.__super__ = msignal_Signal;\nmsignal_Signal1.prototype = $extend(msignal_Signal.prototype,{\n	dispatch: function(value) {\n		var slotsToProcess = this.slots;\n		while(slotsToProcess.nonEmpty) {\n			slotsToProcess.head.execute(value);\n			slotsToProcess = slotsToProcess.tail;\n		}\n	}\n	,createSlot: function(listener,once,priority) {\n		if(priority == null) priority = 0;\n		if(once == null) once = false;\n		return new msignal_Slot1(this,listener,once,priority);\n	}\n});\nvar app_Events = function() { };\napp_Events.__name__ = true;\nvar app_Main = function() { };\napp_Main.__name__ = true;\napp_Main.main = function() {\n	app_App.initialize();\n};\nvar app_importing_JsonImport = function() { };\napp_importing_JsonImport.__name__ = true;\napp_importing_JsonImport.loadFiles = function() {\n	var path = \"data/files.php\";\n	var content = haxe_Http.requestUrl(path);\n	return content.split(\"\\n\");\n};\napp_importing_JsonImport.importJson = function(path) {\n	var json = JSON.parse(haxe_Http.requestUrl(path));\n	app_importing_JsonImport.persons = new haxe_ds_StringMap();\n	app_App.simulation.startWeek = json.week;\n	app_App.simulation.startYear = json.year;\n	app_importing_JsonImport.parse(json.groups,app_App.simulation.groups);\n};\napp_importing_JsonImport.parse = function(groups,root) {\n	var _g = 0;\n	while(_g < groups.length) {\n		var group = groups[_g];\n		++_g;\n		var newgroup = new app_simulation_Group(StringTools.htmlUnescape(group.name),group.color);\n		if(group.children != null) app_importing_JsonImport.parse(group.children,newgroup);\n		if(group.members != null) {\n			var _g1 = 0;\n			var _g2 = group.members;\n			while(_g1 < _g2.length) {\n				var newmember = _g2[_g1];\n				++_g1;\n				newgroup.addMember(app_importing_JsonImport.getPersonReference(StringTools.htmlUnescape(newmember.name),newmember.age,newmember.rank));\n			}\n		}\n		root.addGroup(newgroup);\n	}\n};\napp_importing_JsonImport.getPersonReference = function(name,age,rank) {\n	if(app_importing_JsonImport.persons.exists(name)) {\n		var person = app_importing_JsonImport.persons.get(name);\n		var member = new app_simulation_Member(person);\n		member.isCopy = true;\n		return member;\n	} else {\n		var person1 = new app_simulation_Person(name,age,app_importing_JsonImport.toRank(rank));\n		app_importing_JsonImport.persons.set(name,person1);\n		return new app_simulation_Member(person1);\n	}\n};\napp_importing_JsonImport.toRank = function(integer) {\n	switch(integer) {\n	case 0:\n		return app_simulation_Rank.Neuling;\n	case 1:\n		return app_simulation_Rank.Knappe;\n	case 2:\n		return app_simulation_Rank.Spaeher;\n	case 3:\n		return app_simulation_Rank.Pfadfinder;\n	case 4:\n		return app_simulation_Rank.Kornett;\n	case 5:\n		return app_simulation_Rank.Feldmeister;\n	}\n	return app_simulation_Rank.Neuling;\n};\nvar app_rendering_Renderer = function(canvasId) {\n	this.STATISTIC_LEVEL_THRESHOLD = 2;\n	this.SCROLL_SPEED = 0.1;\n	this.animationSpeed = 0.000625;\n	this.canvas = window.document.getElementById(canvasId);\n	this.ctx = this.canvas.getContext(\"2d\");\n	this.canvas.onmousemove = $bind(this,this.onMouseMove);\n	this.canvas.onmousedown = $bind(this,this.onMouseDown);\n	this.canvas.onmouseup = $bind(this,this.onMouseUp);\n	this.canvas.onmousewheel = $bind(this,this.onMouseScroll);\n	this.zoom = 0.5;\n	this.offsetX = 0;\n	this.offsetY = 0;\n	this.dragging = false;\n	var bufferCanvas = window.document.createElement(\"canvas\");\n	bufferCanvas.width = app_rendering_Renderer.BUFFER_SIZE;\n	bufferCanvas.height = app_rendering_Renderer.BUFFER_SIZE;\n	this.buffer = bufferCanvas.getContext(\"2d\");\n	this.animation = 0;\n	app_Events.WEEK_START.add($bind(this,this.onWeekStart));\n	app_Events.GRAPH_UPDATE.add($bind(this,this.onUpdateGraph));\n	app_Events.APP_START.add($bind(this,this.onAppStart));\n	app_Events.APP_PAUSE.add($bind(this,this.onAppPause));\n	app_Events.APP_RESET.add($bind(this,this.onAppReset));\n	window.document.getElementById(\"start\").onclick = $bind(this,this.onStartClick);\n	window.document.getElementById(\"reset\").onclick = $bind(this,this.onResetClick);\n	window.document.onkeypress = $bind(this,this.onKeyDown);\n	this.scale();\n};\napp_rendering_Renderer.__name__ = true;\napp_rendering_Renderer.prototype = {\n	renderBuffer: function() {\n		this.buffer.clearRect(0,0,this.buffer.canvas.width,this.buffer.canvas.height);\n		this.buffer.translate(app_rendering_Renderer.BUFFER_SIZE / 2,app_rendering_Renderer.BUFFER_SIZE / 2);\n		this.renderRecursive(app_App.simulation.groups);\n		this.buffer.translate(-app_rendering_Renderer.BUFFER_SIZE / 2,-app_rendering_Renderer.BUFFER_SIZE / 2);\n	}\n	,renderRecursive: function(group) {\n		var _g = 0;\n		var _g1 = group.children;\n		while(_g < _g1.length) {\n			var child = _g1[_g];\n			++_g;\n			this.buffer.rotate(child.rotation + this.animation * group.random);\n			this.buffer.translate(0,-child.distance);\n			this.buffer.beginPath();\n			this.buffer.fillStyle = child.color;\n			this.buffer.arc(0,0,child.size,0,2 * Math.PI,false);\n			this.buffer.fill();\n			this.renderRecursive(child);\n			this.buffer.translate(0,child.distance);\n			this.buffer.rotate(-(child.rotation + this.animation * group.random));\n		}\n		var _g2 = 0;\n		var _g11 = group.members;\n		while(_g2 < _g11.length) {\n			var child1 = _g11[_g2];\n			++_g2;\n			this.buffer.rotate(child1.rotation);\n			this.buffer.translate(0,-child1.distance);\n			this.buffer.beginPath();\n			this.buffer.fillStyle = this.rankColor(child1.person.rank);\n			this.buffer.arc(0,0,child1.size,0,2 * Math.PI,false);\n			this.buffer.fill();\n			this.buffer.translate(0,child1.distance);\n			this.buffer.rotate(-child1.rotation);\n		}\n	}\n	,render: function() {\n		var buffersize = 1000;\n		var _offsetX = this.offsetX - 200;\n		var _offsetY = this.offsetY;\n		this.ctx.clearRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height);\n		this.ctx.translate((this.canvas.width - app_rendering_Renderer.BUFFER_SIZE * this.zoom) / 2 + _offsetX,(this.canvas.height - app_rendering_Renderer.BUFFER_SIZE * this.zoom) / 2 + _offsetY);\n		this.ctx.scale(this.zoom,this.zoom);\n		this.ctx.drawImage(this.buffer.canvas,0,0,app_rendering_Renderer.BUFFER_SIZE,app_rendering_Renderer.BUFFER_SIZE);\n		this.ctx.scale(1 / this.zoom,1 / this.zoom);\n		this.ctx.translate(-((this.canvas.width - app_rendering_Renderer.BUFFER_SIZE * this.zoom) / 2 + _offsetX),-((this.canvas.height - app_rendering_Renderer.BUFFER_SIZE * this.zoom) / 2 + _offsetY));\n	}\n	,update: function(elapsed) {\n		if(app_App.simulation == null) return;\n		this.animation += this.animationSpeed * elapsed;\n		this.renderBuffer();\n		this.render();\n	}\n	,rankColor: function(rank) {\n		switch(rank[1]) {\n		case 0:\n			return \"IndianRed\";\n		case 1:\n			return \"Khaki\";\n		case 2:\n			return \"GreenYellow\";\n		case 3:\n			return \"MediumTurquoise\";\n		case 4:\n			return \"DodgerBlue\";\n		case 5:\n			return \"MediumBlue\";\n		}\n		return \"black\";\n	}\n	,onMouseScroll: function(e) {\n		if(e.wheelDelta < 0) this.zoom *= 1 - this.SCROLL_SPEED; else this.zoom *= 1 + this.SCROLL_SPEED;\n	}\n	,onMouseMove: function(e) {\n		if(this.dragging) {\n			this.offsetX = this.offsetStartX + (e.clientX - this.mouseStartX);\n			this.offsetY = this.offsetStartY + (e.clientY - this.mouseStartY);\n			this.render();\n		}\n	}\n	,onMouseUp: function(e) {\n		this.dragging = false;\n	}\n	,onMouseDown: function(e) {\n		this.dragging = true;\n		this.mouseStartX = e.clientX;\n		this.mouseStartY = e.clientY;\n		this.offsetStartX = this.offsetX;\n		this.offsetStartY = this.offsetY;\n	}\n	,scale: function() {\n		this.canvas.width = window.innerWidth;\n		this.canvas.height = window.innerHeight;\n	}\n	,displayFiles: function(files) {\n		var _g1 = this;\n		var list = window.document.getElementById(\"button-load-list\");\n		list.innerHTML = \"\";\n		var _g = 0;\n		while(_g < files.length) {\n			var file = [files[_g]];\n			++_g;\n			var li;\n			var _this = window.document;\n			li = _this.createElement(\"li\");\n			li.onclick = (function(file) {\n				return function(e) {\n					_g1.onLoadListClick(file[0]);\n				};\n			})(file);\n			li.innerHTML = \"<a href='#'>\" + file[0] + \"</a>\";\n			list.appendChild(li);\n		}\n	}\n	,onLoadListClick: function(file) {\n		app_App.load(\"data/\" + file);\n	}\n	,onWeekStart: function(week) {\n		window.document.getElementById(\"now-week\").innerHTML = Std.string((week + app_App.simulation.startWeek) % 52 + 1);\n		window.document.getElementById(\"now-year\").innerHTML = Std.string(Math.floor((week + app_App.simulation.startWeek) / 52) + app_App.simulation.startYear);\n		var rounded = Std.string(Math.round(week / 52 * 10));\n		window.document.getElementById(\"delta-week\").innerHTML = (rounded.charAt(1) == null?\"0\":rounded.charAt(0)) + \",\" + rounded.charAt(rounded.length - 1) + \"j\";\n	}\n	,onUpdateGraph: function() {\n		this.updateListGraph();\n	}\n	,updateListGraph: function() {\n		var list;\n		var _this = window.document;\n		list = _this.createElement(\"ul\");\n		window.document.getElementById(\"graph-list\").innerHTML = \"\";\n		if(app_App.simulation != null) {\n			this.recursiveUpdateList(app_App.simulation.groups,list,this.STATISTIC_LEVEL_THRESHOLD);\n			window.document.getElementById(\"graph-list\").appendChild(list);\n		}\n	}\n	,recursiveUpdateList: function(group,ul,deepness) {\n		var _g = 0;\n		var _g1 = group.children;\n		while(_g < _g1.length) {\n			var child = _g1[_g];\n			++_g;\n			var li;\n			var _this = window.document;\n			li = _this.createElement(\"li\");\n			li.innerHTML = child.name + \"<span class=\\\"list-count\\\">\" + child.get_count() + \"</span>\";\n			if(child.children.length != 0 && deepness > 1) {\n				var newUL;\n				var _this1 = window.document;\n				newUL = _this1.createElement(\"ul\");\n				this.recursiveUpdateList(child,newUL,deepness - 1);\n				li.appendChild(newUL);\n			}\n			ul.appendChild(li);\n		}\n	}\n	,onKeyDown: function(e) {\n		if(e.keyCode == 32) {\n			if(app_App.running) app_App.pause(); else app_App.start();\n		}\n	}\n	,onStartClick: function(e) {\n		if(app_App.running) app_App.pause(); else app_App.start();\n		window.document.getElementById(\"start\").blur();\n	}\n	,onAppStart: function() {\n		window.document.getElementById(\"start\").className += \" active\";\n		window.document.getElementById(\"start\").innerHTML = \"Pausieren\";\n		window.document.getElementById(\"start-week\").innerHTML = Std.string(app_App.simulation.startWeek);\n		window.document.getElementById(\"start-year\").innerHTML = Std.string(app_App.simulation.startYear);\n	}\n	,onAppPause: function() {\n		window.document.getElementById(\"start\").className = StringTools.replace(window.document.getElementById(\"start\").className,\" active\",\"\");\n		window.document.getElementById(\"start\").innerHTML = \"Starten\";\n	}\n	,onAppReset: function() {\n		window.document.getElementById(\"now-week\").innerHTML = \"-\";\n		window.document.getElementById(\"now-year\").innerHTML = \"-\";\n		window.document.getElementById(\"start-week\").innerHTML = \"-\";\n		window.document.getElementById(\"start-year\").innerHTML = \"-\";\n	}\n	,onResetClick: function(e) {\n		app_App.reset();\n	}\n};\nvar app_simulation_Node = function() {\n};\napp_simulation_Node.__name__ = true;\nvar app_simulation_Group = function(name,color) {\n	if(color == null) color = \"rgba(230,240,242, 0.1)\";\n	this.youngness = 0;\n	app_simulation_Node.call(this);\n	this.name = name;\n	if(color == null) this.color = \"rgba(230,240,242, 0.1)\"; else this.color = color;\n	this.parent = null;\n	this.level = 0;\n	this.calculateRandom();\n	this.children = new Array();\n	this.members = new Array();\n};\napp_simulation_Group.__name__ = true;\napp_simulation_Group.__super__ = app_simulation_Node;\napp_simulation_Group.prototype = $extend(app_simulation_Node.prototype,{\n	addGroup: function(group) {\n		group.parent = this;\n		group.level = this.level + 1;\n		this.children.push(group);\n		this.calculatePosition();\n	}\n	,removeGroup: function(group) {\n		HxOverrides.remove(this.children,group);\n		group.parent = null;\n		group.level = -1;\n		if(this.members.length == 0 && this.children.length == 0 && this.parent != null) this.parent.removeGroup(this);\n		this.calculatePosition();\n	}\n	,addMember: function(member) {\n		this.members.push(member);\n		member.person.groups.push(this);\n		this.calculatePosition();\n	}\n	,removeMember: function(person) {\n		var _g = 0;\n		var _g1 = this.members;\n		while(_g < _g1.length) {\n			var member = _g1[_g];\n			++_g;\n			if(member.person == person) {\n				HxOverrides.remove(this.members,member);\n				HxOverrides.remove(person.groups,this);\n				if(this.members.length == 0 && this.children.length == 0 && this.parent != null) this.parent.removeGroup(this);\n				this.calculatePosition();\n			}\n		}\n	}\n	,get_count: function() {\n		var i = 0;\n		var _g = 0;\n		var _g1 = this.members;\n		while(_g < _g1.length) {\n			var member = _g1[_g];\n			++_g;\n			if(!member.isCopy) i++;\n		}\n		var _g2 = 0;\n		var _g11 = this.children;\n		while(_g2 < _g11.length) {\n			var child = _g11[_g2];\n			++_g2;\n			i += child.get_count();\n		}\n		return i;\n	}\n	,simulate: function() {\n		if(this.youngness > 0) {\n			var _g1 = 0;\n			var _g = this.youngness;\n			while(_g1 < _g) {\n				var i = _g1++;\n				if(app_simulation_Probability.probability(app_simulation_Probability.GRUPPE_EINSTIEG)) app_simulation_Person.create().enterGroup(this);\n			}\n			this.youngness--;\n		}\n		var _g2 = 0;\n		var _g11 = this.members;\n		while(_g2 < _g11.length) {\n			var member = _g11[_g2];\n			++_g2;\n			if(!member.isCopy) member.person.simulate();\n		}\n		var _g3 = 0;\n		var _g12 = this.children;\n		while(_g3 < _g12.length) {\n			var child = _g12[_g3];\n			++_g3;\n			child.simulate();\n		}\n	}\n	,calculatePosition: function() {\n		var _count = this.members.length + this.children.length;\n		if(_count == 0) {\n			this.size = 100;\n			if(this.parent != null) this.parent.calculatePosition();\n		}\n		var _size = app_simulation_Node.minSize;\n		var _g = 0;\n		var _g1 = this.children;\n		while(_g < _g1.length) {\n			var child = _g1[_g];\n			++_g;\n			if(_size < child.size) _size = child.size;\n		}\n		var _radius = _size * (_count - 1) / (Math.sqrt(_count) * app_simulation_Node.radius);\n		this.size = (_radius + _size) * app_simulation_Node.margin;\n		var n = 0;\n		var _g2 = 0;\n		var _g11 = this.children;\n		while(_g2 < _g11.length) {\n			var child1 = _g11[_g2];\n			++_g2;\n			child1.distance = _radius;\n			child1.rotation = 2 * Math.PI / _count * n;\n			n++;\n		}\n		var _g3 = 0;\n		var _g12 = this.members;\n		while(_g3 < _g12.length) {\n			var member = _g12[_g3];\n			++_g3;\n			member.distance = _radius;\n			member.rotation = 2 * Math.PI / _count * n;\n			n++;\n		}\n		if(this.parent != null) this.parent.calculatePosition();\n	}\n	,getRankCount: function(rank) {\n		var count = 0;\n		var _g = 0;\n		var _g1 = this.members;\n		while(_g < _g1.length) {\n			var member = _g1[_g];\n			++_g;\n			if(member.person.rank == rank) count++;\n		}\n		return count;\n	}\n	,findPartners: function(person) {\n		var partners = new Array();\n		var count = 0;\n		var potential = this.getRankCount(app_simulation_Rank.Feldmeister) + this.getRankCount(app_simulation_Rank.Kornett);\n		if(potential <= 2) count = 1; else if(potential > 4) count = 2;\n		var _g = 0;\n		var _g1 = this.members;\n		while(_g < _g1.length) {\n			var member = _g1[_g];\n			++_g;\n			if(!(member.person.rank == app_simulation_Rank.Feldmeister || member.person.rank == app_simulation_Rank.Kornett) || member.person == person) continue;\n			if(count > 0) {\n				partners.push(member.person);\n				count--;\n			}\n		}\n		return partners;\n	}\n	,calculateRandom: function() {\n		var seed = app_simulation_Helpers.seed(this.name);\n		if(seed < 0.5) seed = -1 + seed;\n		this.random = seed;\n	}\n});\nvar app_simulation_Helpers = function() { };\napp_simulation_Helpers.__name__ = true;\napp_simulation_Helpers.toWeeklyRate = function(probability,years) {\n	return Math.pow(1 + probability,1 / (years * 52)) - 1;\n};\napp_simulation_Helpers.toWeek = function(year,month) {\n	return year * 52 + month * 4;\n};\napp_simulation_Helpers.seed = function(s) {\n	var seed;\n	if(HxOverrides.cca(s,6) == null) seed = HxOverrides.cca(s,2); else seed = HxOverrides.cca(s,6);\n	var seed1 = (seed * 9301 + 49297) % 233280;\n	seed1 = seed1 / 233280.0;\n	return seed1;\n};\nvar app_simulation_Member = function(person) {\n	this.isCopy = false;\n	app_simulation_Node.call(this);\n	this.person = person;\n	this.size = app_simulation_Node.minSize;\n};\napp_simulation_Member.__name__ = true;\napp_simulation_Member.__super__ = app_simulation_Node;\napp_simulation_Member.prototype = $extend(app_simulation_Node.prototype,{\n});\nvar app_simulation_Rank = { __ename__ : true, __constructs__ : [\"Neuling\",\"Knappe\",\"Spaeher\",\"Pfadfinder\",\"Kornett\",\"Feldmeister\"] };\napp_simulation_Rank.Neuling = [\"Neuling\",0];\napp_simulation_Rank.Neuling.__enum__ = app_simulation_Rank;\napp_simulation_Rank.Knappe = [\"Knappe\",1];\napp_simulation_Rank.Knappe.__enum__ = app_simulation_Rank;\napp_simulation_Rank.Spaeher = [\"Spaeher\",2];\napp_simulation_Rank.Spaeher.__enum__ = app_simulation_Rank;\napp_simulation_Rank.Pfadfinder = [\"Pfadfinder\",3];\napp_simulation_Rank.Pfadfinder.__enum__ = app_simulation_Rank;\napp_simulation_Rank.Kornett = [\"Kornett\",4];\napp_simulation_Rank.Kornett.__enum__ = app_simulation_Rank;\napp_simulation_Rank.Feldmeister = [\"Feldmeister\",5];\napp_simulation_Rank.Feldmeister.__enum__ = app_simulation_Rank;\nvar app_simulation_Person = function(name,age,rank) {\n	this.name = name;\n	this.age = age * 52 + Std[\"int\"](52 * app_simulation_Helpers.seed(name)) - 26;\n	this.rank = rank;\n	this.groups = new Array();\n};\napp_simulation_Person.__name__ = true;\napp_simulation_Person.create = function() {\n	return new app_simulation_Person(\"Unnamed\",app_simulation_Probability.GRUPPE_EINSTIEGSALTER,app_simulation_Rank.Neuling);\n};\napp_simulation_Person.prototype = {\n	simulate: function() {\n		var _g = this.rank;\n		switch(_g[1]) {\n		case 0:\n			if(app_simulation_Probability.probability(app_simulation_Probability.AUSTRITT_NEULING)) {\n				this.remove();\n				return;\n			}\n			if(app_simulation_Probability.probability(app_simulation_Probability.AUFSTIEG_NEULING(this.age,this.groups[0].getRankCount(app_simulation_Rank.Knappe)))) this.rank = app_simulation_Rank.Knappe;\n			break;\n		case 1:\n			if(app_simulation_Probability.probability(app_simulation_Probability.AUSTRITT_KNAPPE)) {\n				this.remove();\n				return;\n			}\n			if(app_simulation_Probability.probability(app_simulation_Probability.AUFSTIEG_KNAPPE(this.age,this.groups[0].getRankCount(app_simulation_Rank.Spaeher)))) this.rank = app_simulation_Rank.Spaeher;\n			break;\n		case 2:\n			if(app_simulation_Probability.probability(app_simulation_Probability.AUSTRITT_SPAEHER)) {\n				this.remove();\n				return;\n			}\n			if(app_simulation_Probability.probability(app_simulation_Probability.AUFSTIEG_SPAEHER(this.age,this.groups[0].getRankCount(app_simulation_Rank.Pfadfinder)))) this.rank = app_simulation_Rank.Pfadfinder;\n			break;\n		case 3:\n			if(app_simulation_Probability.probability(app_simulation_Probability.AUSTRITT_PFADFINDER)) {\n				this.remove();\n				return;\n			}\n			if(app_simulation_Probability.probability(app_simulation_Probability.AUFSTIEG_PFADFINDER(this.age))) this.rank = app_simulation_Rank.Kornett;\n			break;\n		case 4:\n			if(app_simulation_Probability.probability(app_simulation_Probability.AUSTRITT_KORNETT)) {\n				this.remove();\n				return;\n			}\n			if(app_simulation_Probability.probability(app_simulation_Probability.AUFSTIEG_KORNETT(this.age))) this.rank = app_simulation_Rank.Feldmeister;\n			if(app_simulation_Probability.probability(app_simulation_Probability.GRUPPE_GRUENDEN)) {\n				console.log(\"grup\");\n				this.foundGroup(this.groups[0].findPartners(this));\n			}\n			break;\n		case 5:\n			if(app_simulation_Probability.probability(app_simulation_Probability.AUSTRITT_FELDMEISTER)) {\n				this.remove();\n				return;\n			}\n			break;\n		}\n		this.age++;\n	}\n	,foundGroup: function(partners) {\n		var newGroup = new app_simulation_Group(\"Unnamed\");\n		this.groups[0].parent.addGroup(newGroup);\n		this.enterGroup(newGroup);\n		var _g = 0;\n		while(_g < partners.length) {\n			var partner = partners[_g];\n			++_g;\n			partner.enterGroup(newGroup);\n		}\n		newGroup.youngness = app_simulation_Probability.GRUPPE_WERBEPHASE;\n	}\n	,enterGroup: function(group) {\n		var newMember = new app_simulation_Member(this);\n		if(this.groups.length > 0) newMember.isCopy = true;\n		group.addMember(newMember);\n	}\n	,remove: function() {\n		var _g = 0;\n		var _g1 = this.groups;\n		while(_g < _g1.length) {\n			var group = _g1[_g];\n			++_g;\n			group.removeMember(this);\n		}\n	}\n};\nvar app_simulation_Probability = function() { };\napp_simulation_Probability.__name__ = true;\napp_simulation_Probability.AUFSTIEG_NEULING = function(week,groupCount) {\n	var prob = groupCount * 0.05;\n	if(week > app_simulation_Helpers.toWeek(10,6)) return 0.5 + prob;\n	return prob;\n};\napp_simulation_Probability.AUFSTIEG_KNAPPE = function(week,groupCount) {\n	var prob = groupCount * 0.05;\n	if(week > app_simulation_Helpers.toWeek(12,4)) return 0.5 + prob;\n	return prob;\n};\napp_simulation_Probability.AUFSTIEG_SPAEHER = function(week,groupCount) {\n	var prob = groupCount * 0.05;\n	if(week > app_simulation_Helpers.toWeek(14,5)) return 0.5 + prob;\n	return prob;\n};\napp_simulation_Probability.AUFSTIEG_PFADFINDER = function(week) {\n	if(week > app_simulation_Helpers.toWeek(16,7)) return 0.5;\n	return 0;\n};\napp_simulation_Probability.AUFSTIEG_KORNETT = function(week) {\n	if(week > app_simulation_Helpers.toWeek(19,3)) return 0.5;\n	return 0;\n};\napp_simulation_Probability.probability = function(value) {\n	if(value == 0) return false; else return Math.random() < value;\n};\nvar app_simulation_Simulation = function() {\n	this.graphUpdateCounter = 0;\n	this.week = 0;\n	this.groups = new app_simulation_Group(\"HP\",\"transparent\");\n};\napp_simulation_Simulation.__name__ = true;\napp_simulation_Simulation.prototype = {\n	simulate: function() {\n		this.groups.simulate();\n		app_Events.WEEK_START.dispatch(this.week);\n		this.week++;\n		if(this.graphUpdateCounter == 0) {\n			app_Events.GRAPH_UPDATE.dispatch();\n			this.graphUpdateCounter = app_simulation_Simulation.GRAPH_UPDATE_THRESHOLD;\n		} else this.graphUpdateCounter--;\n	}\n};\nvar haxe_Http = function(url) {\n	this.url = url;\n	this.headers = new List();\n	this.params = new List();\n	this.async = true;\n};\nhaxe_Http.__name__ = true;\nhaxe_Http.requestUrl = function(url) {\n	var h = new haxe_Http(url);\n	h.async = false;\n	var r = null;\n	h.onData = function(d) {\n		r = d;\n	};\n	h.onError = function(e) {\n		throw e;\n	};\n	h.request(false);\n	return r;\n};\nhaxe_Http.prototype = {\n	request: function(post) {\n		var me = this;\n		me.responseData = null;\n		var r = this.req = js_Browser.createXMLHttpRequest();\n		var onreadystatechange = function(_) {\n			if(r.readyState != 4) return;\n			var s;\n			try {\n				s = r.status;\n			} catch( e ) {\n				s = null;\n			}\n			if(s == undefined) s = null;\n			if(s != null) me.onStatus(s);\n			if(s != null && s >= 200 && s < 400) {\n				me.req = null;\n				me.onData(me.responseData = r.responseText);\n			} else if(s == null) {\n				me.req = null;\n				me.onError(\"Failed to connect or resolve host\");\n			} else switch(s) {\n			case 12029:\n				me.req = null;\n				me.onError(\"Failed to connect to host\");\n				break;\n			case 12007:\n				me.req = null;\n				me.onError(\"Unknown host\");\n				break;\n			default:\n				me.req = null;\n				me.responseData = r.responseText;\n				me.onError(\"Http Error #\" + r.status);\n			}\n		};\n		if(this.async) r.onreadystatechange = onreadystatechange;\n		var uri = this.postData;\n		if(uri != null) post = true; else {\n			var $it0 = this.params.iterator();\n			while( $it0.hasNext() ) {\n				var p = $it0.next();\n				if(uri == null) uri = \"\"; else uri += \"&\";\n				uri += encodeURIComponent(p.param) + \"=\" + encodeURIComponent(p.value);\n			}\n		}\n		try {\n			if(post) r.open(\"POST\",this.url,this.async); else if(uri != null) {\n				var question = this.url.split(\"?\").length <= 1;\n				r.open(\"GET\",this.url + (question?\"?\":\"&\") + uri,this.async);\n				uri = null;\n			} else r.open(\"GET\",this.url,this.async);\n		} catch( e1 ) {\n			me.req = null;\n			this.onError(e1.toString());\n			return;\n		}\n		if(!Lambda.exists(this.headers,function(h) {\n			return h.header == \"Content-Type\";\n		}) && post && this.postData == null) r.setRequestHeader(\"Content-Type\",\"application/x-www-form-urlencoded\");\n		var $it1 = this.headers.iterator();\n		while( $it1.hasNext() ) {\n			var h1 = $it1.next();\n			r.setRequestHeader(h1.header,h1.value);\n		}\n		r.send(uri);\n		if(!this.async) onreadystatechange(null);\n	}\n	,onData: function(data) {\n	}\n	,onError: function(msg) {\n	}\n	,onStatus: function(status) {\n	}\n};\nvar haxe_ds_StringMap = function() {\n	this.h = { };\n};\nhaxe_ds_StringMap.__name__ = true;\nhaxe_ds_StringMap.__interfaces__ = [IMap];\nhaxe_ds_StringMap.prototype = {\n	set: function(key,value) {\n		this.h[\"$\" + key] = value;\n	}\n	,get: function(key) {\n		return this.h[\"$\" + key];\n	}\n	,exists: function(key) {\n		return this.h.hasOwnProperty(\"$\" + key);\n	}\n};\nvar js_Boot = function() { };\njs_Boot.__name__ = true;\njs_Boot.__string_rec = function(o,s) {\n	if(o == null) return \"null\";\n	if(s.length >= 5) return \"<...>\";\n	var t = typeof(o);\n	if(t == \"function\" && (o.__name__ || o.__ename__)) t = \"object\";\n	switch(t) {\n	case \"object\":\n		if(o instanceof Array) {\n			if(o.__enum__) {\n				if(o.length == 2) return o[0];\n				var str = o[0] + \"(\";\n				s += \"\\t\";\n				var _g1 = 2;\n				var _g = o.length;\n				while(_g1 < _g) {\n					var i = _g1++;\n					if(i != 2) str += \",\" + js_Boot.__string_rec(o[i],s); else str += js_Boot.__string_rec(o[i],s);\n				}\n				return str + \")\";\n			}\n			var l = o.length;\n			var i1;\n			var str1 = \"[\";\n			s += \"\\t\";\n			var _g2 = 0;\n			while(_g2 < l) {\n				var i2 = _g2++;\n				str1 += (i2 > 0?\",\":\"\") + js_Boot.__string_rec(o[i2],s);\n			}\n			str1 += \"]\";\n			return str1;\n		}\n		var tostr;\n		try {\n			tostr = o.toString;\n		} catch( e ) {\n			return \"???\";\n		}\n		if(tostr != null && tostr != Object.toString) {\n			var s2 = o.toString();\n			if(s2 != \"[object Object]\") return s2;\n		}\n		var k = null;\n		var str2 = \"{\\n\";\n		s += \"\\t\";\n		var hasp = o.hasOwnProperty != null;\n		for( var k in o ) {\n		if(hasp && !o.hasOwnProperty(k)) {\n			continue;\n		}\n		if(k == \"prototype\" || k == \"__class__\" || k == \"__super__\" || k == \"__interfaces__\" || k == \"__properties__\") {\n			continue;\n		}\n		if(str2.length != 2) str2 += \", \\n\";\n		str2 += s + k + \" : \" + js_Boot.__string_rec(o[k],s);\n		}\n		s = s.substring(1);\n		str2 += \"\\n\" + s + \"}\";\n		return str2;\n	case \"function\":\n		return \"<function>\";\n	case \"string\":\n		return o;\n	default:\n		return String(o);\n	}\n};\nvar js_Browser = function() { };\njs_Browser.__name__ = true;\njs_Browser.createXMLHttpRequest = function() {\n	if(typeof XMLHttpRequest != \"undefined\") return new XMLHttpRequest();\n	if(typeof ActiveXObject != \"undefined\") return new ActiveXObject(\"Microsoft.XMLHTTP\");\n	throw \"Unable to create XMLHttpRequest object.\";\n};\nvar msignal_Signal2 = function(type1,type2) {\n	msignal_Signal.call(this,[type1,type2]);\n};\nmsignal_Signal2.__name__ = true;\nmsignal_Signal2.__super__ = msignal_Signal;\nmsignal_Signal2.prototype = $extend(msignal_Signal.prototype,{\n	dispatch: function(value1,value2) {\n		var slotsToProcess = this.slots;\n		while(slotsToProcess.nonEmpty) {\n			slotsToProcess.head.execute(value1,value2);\n			slotsToProcess = slotsToProcess.tail;\n		}\n	}\n	,createSlot: function(listener,once,priority) {\n		if(priority == null) priority = 0;\n		if(once == null) once = false;\n		return new msignal_Slot2(this,listener,once,priority);\n	}\n});\nvar msignal_Slot = function(signal,listener,once,priority) {\n	if(priority == null) priority = 0;\n	if(once == null) once = false;\n	this.signal = signal;\n	this.set_listener(listener);\n	this.once = once;\n	this.priority = priority;\n	this.enabled = true;\n};\nmsignal_Slot.__name__ = true;\nmsignal_Slot.prototype = {\n	remove: function() {\n		this.signal.remove(this.listener);\n	}\n	,set_listener: function(value) {\n		return this.listener = value;\n	}\n};\nvar msignal_Slot0 = function(signal,listener,once,priority) {\n	if(priority == null) priority = 0;\n	if(once == null) once = false;\n	msignal_Slot.call(this,signal,listener,once,priority);\n};\nmsignal_Slot0.__name__ = true;\nmsignal_Slot0.__super__ = msignal_Slot;\nmsignal_Slot0.prototype = $extend(msignal_Slot.prototype,{\n	execute: function() {\n		if(!this.enabled) return;\n		if(this.once) this.remove();\n		this.listener();\n	}\n});\nvar msignal_Slot1 = function(signal,listener,once,priority) {\n	if(priority == null) priority = 0;\n	if(once == null) once = false;\n	msignal_Slot.call(this,signal,listener,once,priority);\n};\nmsignal_Slot1.__name__ = true;\nmsignal_Slot1.__super__ = msignal_Slot;\nmsignal_Slot1.prototype = $extend(msignal_Slot.prototype,{\n	execute: function(value1) {\n		if(!this.enabled) return;\n		if(this.once) this.remove();\n		if(this.param != null) value1 = this.param;\n		this.listener(value1);\n	}\n});\nvar msignal_Slot2 = function(signal,listener,once,priority) {\n	if(priority == null) priority = 0;\n	if(once == null) once = false;\n	msignal_Slot.call(this,signal,listener,once,priority);\n};\nmsignal_Slot2.__name__ = true;\nmsignal_Slot2.__super__ = msignal_Slot;\nmsignal_Slot2.prototype = $extend(msignal_Slot.prototype,{\n	execute: function(value1,value2) {\n		if(!this.enabled) return;\n		if(this.once) this.remove();\n		if(this.param1 != null) value1 = this.param1;\n		if(this.param2 != null) value2 = this.param2;\n		this.listener(value1,value2);\n	}\n});\nvar $_, $fid = 0;\nfunction $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }\nif(Array.prototype.indexOf) HxOverrides.indexOf = function(a,o,i) {\n	return Array.prototype.indexOf.call(a,o,i);\n};\nMath.NaN = Number.NaN;\nMath.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;\nMath.POSITIVE_INFINITY = Number.POSITIVE_INFINITY;\nMath.isFinite = function(i) {\n	return isFinite(i);\n};\nMath.isNaN = function(i1) {\n	return isNaN(i1);\n};\nString.__name__ = true;\nArray.__name__ = true;\nvar Int = { __name__ : [\"Int\"]};\nmsignal_SlotList.NIL = new msignal_SlotList(null,null);\napp_App.source = \"\";\napp_App.running = false;\napp_App.oldTime = 0;\napp_App.weeklyTime = 0;\napp_App.SIMULATION_SPEED = 300;\napp_Events.WEEK_START = new msignal_Signal1(Int);\napp_Events.APP_PAUSE = new msignal_Signal0();\napp_Events.APP_START = new msignal_Signal0();\napp_Events.APP_RESET = new msignal_Signal0();\napp_Events.GRAPH_UPDATE = new msignal_Signal0();\napp_rendering_Renderer.BUFFER_SIZE = 3000;\napp_simulation_Node.minSize = 2;\napp_simulation_Node.radius = 0.7;\napp_simulation_Node.margin = 1.2;\napp_simulation_Probability.AUSTRITT_NEULING = app_simulation_Helpers.toWeeklyRate(0.42,2);\napp_simulation_Probability.AUSTRITT_KNAPPE = app_simulation_Helpers.toWeeklyRate(0.43,2);\napp_simulation_Probability.AUSTRITT_SPAEHER = app_simulation_Helpers.toWeeklyRate(0.41,2);\napp_simulation_Probability.AUSTRITT_PFADFINDER = app_simulation_Helpers.toWeeklyRate(0.19,2);\napp_simulation_Probability.AUSTRITT_KORNETT = app_simulation_Helpers.toWeeklyRate(0.33,2);\napp_simulation_Probability.AUSTRITT_FELDMEISTER = app_simulation_Helpers.toWeeklyRate(0.2,2);\napp_simulation_Probability.GRUPPE_WERBEPHASE = 5;\napp_simulation_Probability.GRUPPE_EINSTIEG = 0.5;\napp_simulation_Probability.GRUPPE_EINSTIEGSALTER = 10;\napp_simulation_Probability.GRUPPE_GRUENDEN = 0.005;\napp_simulation_Simulation.GRAPH_UPDATE_THRESHOLD = 5;\napp_Main.main();\n})();\n",
-			"file": "build/main.js",
-			"file_size": 39238,
-			"file_write_time": 131222460597440933,
-			"settings":
-			{
-				"buffer_size": 39238,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/App.hx",
-			"settings":
-			{
-				"buffer_size": 2185,
+				"buffer_size": 1988,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/Events.hx",
-			"settings":
-			{
-				"buffer_size": 308,
-				"line_ending": "Unix"
 			}
 		}
 	],
@@ -706,50 +657,37 @@
 	},
 	"expanded_folders":
 	[
-		"/home/jan/Projekte/2016/volkszaehlung",
-		"/home/jan/Projekte/2016/volkszaehlung/build"
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/importing",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/rendering",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/simulation",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/build",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/build/data"
 	],
 	"file_history":
 	[
-		"/home/jan/Projekte/2016/volkszaehlung/build/data/files.php",
-		"/home/jan/Projekte/2016/volkszaehlung/build/data/2016-9-28.json",
-		"/home/jan/Projekte/2016/volkszaehlung/import/Volkszählung_2016_Sippenliste_IV_Parzival.csv",
-		"/home/jan/Projekte/2016/volkszaehlung/import/Volkszählung_2016_Sippenliste_I_UZ.csv",
-		"/home/jan/Projekte/2016/volkszaehlung/import/Volkszählung_2016_Sippenliste_I_ML.csv",
-		"/home/jan/Projekte/2016/volkszaehlung/import/Volkszählung_2016_Sippenliste_I_PM.csv",
-		"/home/jan/Projekte/2016/volkszaehlung/import/Volkszählung_2016_Sippenliste_IV_UvH.csv",
-		"/home/jan/Projekte/2016/volkszaehlung/app/importing/Json.hx",
-		"/home/jan/Projekte/2016/volkszaehlung/build/data/test.json",
-		"/home/jan/Projekte/2016/volkszaehlung/app/Importer.hx",
-		"/home/jan/Projekte/2016/volkszaehlung/build/index.html",
-		"/home/jan/Projekte/2016/volkszaehlung/app/importing/JsonImport.hx",
-		"/home/jan/Projekte/2016/volkszaehlung/app.hxml",
-		"/home/jan/Projekte/2016/volkszaehlung/import.hxml",
-		"/home/jan/Projekte/2016/volkszaehlung/app/App.hx",
-		"/home/jan/Projekte/2016/volkszaehlung/app/simulation/Node.hx",
-		"/home/jan/Projekte/2016/volkszaehlung/build/style.css",
-		"/home/jan/Projekte/2016/volkszaehlung/app/rendering/Renderer.hx",
-		"/home/jan/Projekte/2016/volkszaehlung/build/data/2016-9-25.json",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/build/index.html",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/Events.hx",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/importing/Json.hx",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/Importer.hx",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/rendering/Renderer.hx",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/build/data/test.json",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app.hxml",
+		"/D/Dateien/Projekte/2016/Volkszaehlung/source/import.hxml",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/build/data/2016-9-22.json",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/importing/JsonImport.hx",
-		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/Importer.hx",
-		"/D/Dateien/Projekte/2016/Volkszaehlung/source/build/data/test.json",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/.gitmodules",
-		"/D/Dateien/Projekte/2016/Volkszaehlung/source/import.hxml",
-		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app.hxml",
-		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/rendering/Renderer.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/simulation/Simulation.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/simulation/Group.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/simulation/Person.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/build/main.js",
-		"/D/Dateien/Projekte/2016/Volkszaehlung/source/build/index.html",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/simulation/Probability.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/.gitignore",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/simulation/Helpers.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/App.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/simulation/Member.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/build/style.css",
-		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/Events.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/compile.hxml",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/Main.hx",
 		"/D/Dateien/Projekte/2016/Volkszaehlung/source/app/simulation/Node.hx",
@@ -838,7 +776,25 @@
 		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/nodes/CameraNode.hx",
 		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/nodes/CameraVehicleNode.hx",
 		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/nodes/CollisionNode.hx",
-		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/nodes/GameNode.hx"
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/nodes/GameNode.hx",
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/nodes/InputNode.hx",
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/nodes/RenderNode.hx",
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/nodes/VehicleNode.hx",
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/scenes/Scene.hx",
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/systems/SystemPriorities.hx",
+		"/C/Users/Bausch/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/components/Infobox.hx",
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/components/Boost.hx",
+		"/C/Users/Bausch/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/Bausch/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/res/levels/level0.xml",
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/math/Degree.hx",
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/math/Radians.hx",
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/res/levels/0.json",
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/scenes/Preloader.hx",
+		"/C/Users/Bausch/AppData/Roaming/Sublime Text 3/Packages/User/Zeal.sublime-settings",
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/math/Collision.hx",
+		"/D/Dateien/Projekte/2015/Wöhlerschule BLL/src/app/math/Rectangle.hx"
 	],
 	"find":
 	{
@@ -939,255 +895,114 @@
 			[
 				{
 					"buffer": 0,
-					"file": "build/index.html",
+					"file": "app/App.hx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3508,
+						"buffer_size": 2779,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1040,
-								1040
+								750,
+								750
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 378.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/Importer.hx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6205,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6002,
-								6002
-							]
-						],
-						"settings":
-						{
-							"haxe-build-id": 0,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"haxe-build-id": 1,
 							"syntax": "Packages/Haxe/Haxe.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2801.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "build/style.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1535,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								820,
-								820
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 702.0,
+						"translation.y": 1320.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": ".gitignore",
+					"buffer": 1,
+					"file": "build/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 103,
+						"buffer_size": 3537,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								17,
-								17
+								2028,
+								2028
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 300.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "import.hxml",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 90,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"haxe-build-id": 1,
-							"syntax": "Packages/Haxe/Hxml.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
+					"buffer": 2,
 					"file": "app/rendering/Renderer.hx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10244,
+						"buffer_size": 11537,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7574,
-								7574
+								7661,
+								7661
 							]
 						],
 						"settings":
 						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
 							"haxe-build-id": 1,
 							"syntax": "Packages/Haxe/Haxe.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3701.0,
+						"translation.y": 4129.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "build/data/files.php",
+					"buffer": 3,
+					"file": "app/simulation/Person.hx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9,
+						"buffer_size": 4166,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "build/main.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 39238,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "app/App.hx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2185,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1530,
-								1530
+								945,
+								945
 							]
 						],
 						"settings":
@@ -1197,40 +1012,42 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 864.0,
+						"translation.x": -0.0,
+						"translation.y": 600.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "app/Events.hx",
+					"buffer": 4,
+					"file": "build/style.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 308,
+						"buffer_size": 1988,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								252,
-								252
+								1570,
+								1570
 							]
 						],
 						"settings":
 						{
-							"haxe-build-id": 1,
-							"syntax": "Packages/Haxe/Haxe.tmLanguage"
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1687.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
