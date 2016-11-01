@@ -15,6 +15,7 @@ class Group extends Node{
 
     public var totalCount(get, never): Int;
     public var count(get, never): Int;
+    public var startCount: Int;
 
     public var name: String;
     public var color: String;

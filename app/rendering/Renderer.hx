@@ -32,7 +32,7 @@ class Renderer{
     private var offsetStartY: Int;
 
     private var animation: Float;
-    private var animationSpeed: Float = 0.01 / 16;
+    private var animationSpeed: Float = 0.003 / 16;
     public var DISPLAY_RELATIONS: Bool = true;
 
     private var SCROLL_SPEED: Float = 0.1;
@@ -269,7 +269,9 @@ class Renderer{
 
         for (child in group.children) {
             var li: LIElement = Browser.document.createLIElement();
-            li.innerHTML = child.name + "<span class=\"list-count\">" + child.count + "</span>";
+            var count: Int = child.count;
+            var delta: Int = child.count - child.startCount;
+            li.innerHTML = child.name + "<span class=\"list-count\">" + child.count + " (" + (delta > 0 ? "+" : "") + delta + ")</span>";
 
             //Call children recursivly
             if (child.children.length != 0 && deepness > 1) {

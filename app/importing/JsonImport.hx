@@ -50,7 +50,7 @@ class JsonImport {
                 }
             }
 
-
+            newgroup.startCount = newgroup.count;
             root.addGroup(newgroup);
 
         }

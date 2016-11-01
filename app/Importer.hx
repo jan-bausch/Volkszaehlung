@@ -34,6 +34,9 @@ class Importer extends CommandLine {
         "Siegfried" => "red",
         "Wulfila" => "brown",
 
+        "III" => "rgba(215, 26, 44, 0.8)",
+        "Armin" => "green",     
+
         "IV" => "rgba(131,80,46,0.8)",
         "Parzival" => "rgba(34,139,34,0.8)",
         "Ulrich von Hutten" => "rgba(161,0,0,0.8)",
@@ -45,6 +48,12 @@ class Importer extends CommandLine {
         "Zinzendorf" => "green",
         "Dietrich Bonhoeffer" => "black",
         "Dietrich von Bern" => "red",
+
+        "VII" => "rgba(255, 104, 0,0.7)",
+        "Oranien" => "green",
+        "Wilhelmus" => "blue",
+        "Paul Schneider" => "red",
+        "Albert Schweitzer" => "black",
     ];
 
     private static var rankMap: Map<String, Int> = [
@@ -55,16 +64,21 @@ class Importer extends CommandLine {
         "Neuling" => 0,
         "neuling" => 0,
         "Kn" => 1,
+        "K" => 1,
         "Knappe" => 1,
         "Sp" => 2,
         "SP" => 2,
         "Späher" => 2,
         "P" => 3,
+        "p" => 3,
         "Pf" => 3,
         "aP" => 3,
         "Kt" => 4,
+        "kt" => 4,
         "Kt (zbV)" => 4,
+        "zbV" => 4,
         "Fm" => 5,
+        "fm" => 5,
         "Fm (zbV)" => 5,
         "Fm/Lstf" => 5
     ];
@@ -73,6 +87,9 @@ class Importer extends CommandLine {
         "zbV", "", "ZbV"
     ];
 
+    private static var stammMap: Array<String> = [
+        "I", "II", "III", "IV", "V", "VI", "VII"
+    ];
 
     public function runDefault() {
         if (out == null) out = "../build/data/" + Std.string(Date.now().getFullYear())+"-"+Std.string(Date.now().getMonth()+1)+"-"+Std.string(Date.now().getDate())+".json";
@@ -85,11 +102,18 @@ class Importer extends CommandLine {
                     groups: new Array<JsonGroup>()
                     };          
 
+        var paths: Array<String> = FileSystem.readDirectory(dir);
+
         //Go through files
-        for (path in FileSystem.readDirectory(dir)) {
+        for (path in paths) {
             if (Path.extension(path) != "csv") continue;
             this.readFile(path);
         }
+
+        //Order by roman notation
+        this.data.groups.sort( function(a: JsonGroup, b: JsonGroup) {
+            return stammMap.indexOf(a.name) - stammMap.indexOf(b.name);
+        });
 
         //Save json
         Sys.println("------");
