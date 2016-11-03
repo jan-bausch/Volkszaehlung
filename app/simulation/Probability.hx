@@ -12,29 +12,29 @@ class Probability {
     public static var AUSTRITT_FELDMEISTER: Float = Helpers.toWeeklyRate(0.2, 2);
 
     public static var GRUPPE_WERBEPHASE: Int = 5; //Time in weeks new members can be attracted
-    public static var GRUPPE_EINSTIEG: Float = 0.5;
+    public static var GRUPPE_EINSTIEG: Float = 0.65;
     public static var GRUPPE_EINSTIEGSALTER: Int = 10;
-    public static var GRUPPE_GRUENDEN: Float = 0.005;
+    public static var GRUPPE_GRUENDEN: Float = 0.003;
 
     public static function AUFSTIEG_NEULING(week: Int, groupCount: Int) : Float {
         //Set probability if week threshold is reached
-        var prob: Float = groupCount * 0.05;
+        var prob: Float = groupCount * 0.3;
         if (week > Helpers.toWeek(10, 6)) return 0.5 + prob;
-        return prob;
+        return 0;
     }
 
     public static function AUFSTIEG_KNAPPE(week: Int, groupCount: Int) : Float {
         //Set probability if week threshold is reached
-        var prob: Float = groupCount * 0.05;
+        var prob: Float = groupCount * 1;
         if (week > Helpers.toWeek(12, 4)) return 0.5 + prob;
-        return prob;
+        return 0;
     }
 
     public static function AUFSTIEG_SPAEHER(week: Int, groupCount: Int) : Float {
         //Set probability if week threshold is reached
         var prob: Float = groupCount * 0.05;
         if (week > Helpers.toWeek(14, 5)) return 0.5 + prob;
-        return prob;
+        return 0;
     }
 
     public static function AUFSTIEG_PFADFINDER(week: Int) : Float {

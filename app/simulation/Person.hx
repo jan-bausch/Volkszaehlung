@@ -92,7 +92,6 @@ class Person {
 
                 //Person wands to found group
                 if (Probability.probability(Probability.GRUPPE_GRUENDEN)) {
-                    trace("grup");
                     //Search for partners and found group
                     this.foundGroup(this.groups[0].findPartners(this));
                 }

@@ -31,6 +31,7 @@ class Importer extends CommandLine {
         "Ulrich Zwingli" => "white",
 
         "II" => "rgba(87, 127, 170,0.8)",
+        "Volker" => "blue",
         "Siegfried" => "red",
         "Wulfila" => "brown",
 
@@ -72,11 +73,11 @@ class Importer extends CommandLine {
         "P" => 3,
         "p" => 3,
         "Pf" => 3,
-        "aP" => 3,
         "Kt" => 4,
         "kt" => 4,
         "Kt (zbV)" => 4,
         "zbV" => 4,
+        "aP" => 4,
         "Fm" => 5,
         "fm" => 5,
         "Fm (zbV)" => 5,

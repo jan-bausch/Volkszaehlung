@@ -3,6 +3,12 @@ package app.simulation;
 class Helpers {
 
 
+    public static function toYear(week: Float) : String {
+        week /= 52;
+        week *= Math.pow(10, 1);
+        return Std.string(Math.round(week) / Math.pow(10, 1));
+    }
+
     public static function toWeeklyRate(probability: Float, years: Int) {
         return Math.pow(1 + probability, 1 / (years * 52)) - 1; 
     }

@@ -1,7 +1,8 @@
-    package app.rendering;
+package app.rendering;
 
 import app.simulation.Group;
 import app.simulation.Person;
+import app.simulation.Helpers;
 
 import js.Browser;
 import js.html.CanvasElement;
@@ -48,7 +49,7 @@ class Renderer{
         this.canvas.onmousemove = this.onMouseMove;
         this.canvas.onmousedown = this.onMouseDown;
         this.canvas.onmouseup = this.onMouseUp;
-        this.canvas.onmousewheel = this.onMouseScroll;
+        this.canvas.addEventListener("wheel", this.onMouseScroll);
 
         this.zoom = 0.5;
         this.offsetX = 0;
@@ -169,11 +170,11 @@ class Renderer{
         return "black";
     }
 
-    private function onMouseScroll(e: WheelEvent) {
-        if (e.wheelDelta < 0) {
-            this.zoom *= 1 - this.SCROLL_SPEED;
-        } else {
+    private function onMouseScroll(e: Dynamic) {
+        if (e.deltaY < 0) {
             this.zoom *= 1 + this.SCROLL_SPEED;
+        } else {
+            this.zoom *= 1 - this.SCROLL_SPEED;
         }
     }
 
@@ -248,11 +249,10 @@ class Renderer{
         //Update week display
         Browser.document.getElementById("now-week").innerHTML = Std.string((week + App.simulation.startWeek) % 52 + 1);
         Browser.document.getElementById("now-year").innerHTML = Std.string(Math.floor((week + App.simulation.startWeek) / 52) + App.simulation.startYear);
-        var rounded: String = Std.string(Math.fround(week / 52 * 10));
-        Browser.document.getElementById("delta-week").innerHTML = (rounded.charAt(1) == null ? "0" : rounded.charAt(0)) + "," + (rounded.charAt(rounded.length - 1))  + "j";
+        Browser.document.getElementById("delta-week").innerHTML = Helpers.toYear(week) + "j";
     }
 
-
+ 
     private function onUpdateGraph() {
         this.updateListGraph();
     }
@@ -286,7 +286,7 @@ class Renderer{
     }
 
     private function onKeyDown(e: KeyboardEvent) {
-        if (e.keyCode == 32) {
+        if (e.keyCode == 32 || e.charCode == 32) {
             if (App.running) {
                 App.pause();
             } else {

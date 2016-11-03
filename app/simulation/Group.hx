@@ -140,7 +140,9 @@ class Group extends Node{
         }
         
         //Calculate radius
-        var _radius: Float = _size * (_count - 1) / (Math.sqrt(_count) * Node.radius);
+        var _radius: Float = _size * (_count - 1) / (Math.pow(_count, 0.25) * Node.radius);
+        if (_count == 2) _radius = _size  + Node.margin;
+        if (_count == 3) _radius = _size * 1.5  + Node.margin;
 
         this.size = (_radius + _size) * Node.margin;
 
@@ -164,9 +166,10 @@ class Group extends Node{
         if (this.parent != null) parent.calculatePosition();
     }
 
-    public function getRankCount(rank: Rank) : Int {
+    public function getRankCount(rank: Rank, excludeMembersOf2Groups = false) : Int {
         var count: Int = 0;
         for (member in this.members) {
+            if (excludeMembersOf2Groups && member.person.groups.length > 2) continue;
             if (member.person.rank == rank)count++;
         }
         return count;
@@ -175,12 +178,14 @@ class Group extends Node{
     public function findPartners(person: Person) : Array<Person> {
         var partners: Array<Person> = new Array<Person>();
         var count: Int = 0; //Minimal optimal count of Gruppenführer
-        var potential: Int = this.getRankCount(Rank.Feldmeister) + this.getRankCount(Rank.Kornett); //Potential list of Gruppenführer
+        var potential: Int = this.getRankCount(Rank.Feldmeister, true) + this.getRankCount(Rank.Kornett, true); //Potential list of Gruppenführer
 
         if (potential <= 2) {
             count = 1;
-        } else if (potential > 4) {
+        } else if (potential <= 4) {
             count = 2;
+        } else {
+            count = 3;
         }
 
         for (member in this.members) {

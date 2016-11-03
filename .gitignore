@@ -1,4 +1,5 @@
 build/data/*.json
+build/data/files.php
 !build/data/example.json
 !build/data/test.json
 build/main.js
